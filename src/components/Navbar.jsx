@@ -32,12 +32,12 @@ const services = [
 function Navbar() {
   const [isOpen, setIsOpen] = useState(false);
   const [isMobile, setIsMobile] = useState(window.innerWidth <= 768);
-  const [showDropdown, setShowDropdown] = useState(false); // For desktop dropdown
-  const [showMobileDropdown, setShowMobileDropdown] = useState(false); // For mobile dropdown
+  const [showDropdown, setShowDropdown] = useState(false);
+  const [showMobileDropdown, setShowMobileDropdown] = useState(false);
   const { cartItems } = useCart();
   const navigate = useNavigate();
-  const mobileMenuRef = useRef(null); // Reference for the mobile menu
-  let dropdownTimeout; // Timeout for dropdown delay
+  const mobileMenuRef = useRef(null);
+  let dropdownTimeout;
 
   useEffect(() => {
     const handleResize = () => {
@@ -51,7 +51,7 @@ function Navbar() {
   useEffect(() => {
     const handleClickOutside = (event) => {
       if (mobileMenuRef.current && !mobileMenuRef.current.contains(event.target)) {
-        setIsOpen(false); // Close the mobile menu if clicked outside
+        setIsOpen(false);
       }
     };
 
@@ -66,47 +66,47 @@ function Navbar() {
 
   const handleNavigation = (path) => {
     navigate(path);
-    setIsOpen(false); // Close the mobile menu
+    setIsOpen(false);
     setShowDropdown(false);
     setShowMobileDropdown(false);
   };
 
   const handleMouseEnter = () => {
-    clearTimeout(dropdownTimeout); // Clear any existing timeout
+    clearTimeout(dropdownTimeout);
     setShowDropdown(true);
   };
 
   const handleMouseLeave = () => {
     dropdownTimeout = setTimeout(() => {
       setShowDropdown(false);
-    }, 300); // Delay closing by 300ms
+    }, 300);
   };
 
   return (
-    <nav className="bg-black fixed w-full z-50">
+    <nav className="bg-white fixed w-full z-50 shadow-sm">
       <div className="max-w-7xl mx-auto px-4">
         <div className="flex justify-between items-center h-16">
           <div className="flex items-center">
             <img
-              src="https://i.postimg.cc/gJCNMjt8/brenxlogo.jpg"
+              src="https://i.postimg.cc/HxfZNvVV/logo-2.jpg"
               alt="brenxx-auto-services"
-              className="h-12 w-26 mr-2"
+              className="h-14 w-20 mr-2"
             />
-            <Link to="/" className="text-2xl">
-              <span className="text-white font-bold">BRENXX AUTO</span>
+            <Link to="/" className="text-3xl">
+              <span className="text-red-600 font-bold" style={{ fontFamily: 'Courier, monospace' }}>German Point</span>
             </Link>
           </div>
 
           {/* Desktop Navigation */}
           <div className="hidden md:flex text-white font-bold items-center space-x-8">
-            <Link to="/" className="nav-link text-white hover:text-blue-600 transition-colors duration-200">
+            <Link to="/" className="nav-link text-black hover:text-blue-600 transition-colors duration-200">
               HOME
             </Link>
-            <Link to="/aboutus" className="nav-link hover:text-blue-600 transition-colors duration-200">
+            <Link to="/aboutus" className="nav-link text-black hover:text-blue-600 transition-colors duration-200">
               ABOUT US
             </Link>
             <div
-              className="relative nav-link cursor-pointer flex items-center"
+              className="relative nav-link text-black cursor-pointer flex items-center"
               onMouseEnter={handleMouseEnter}
               onMouseLeave={handleMouseLeave}
             >
@@ -127,36 +127,50 @@ function Navbar() {
                 </div>
               )}
             </div>
-            <Link to="/offers" className="nav-link hover:text-blue-600 transition-colors duration-200">
+            <Link to="/offers" className="nav-link text-black hover:text-blue-600 transition-colors duration-200">
               OFFERS
             </Link>
-            <Link to="/gallery" className="nav-link hover:text-blue-600 transition-colors duration-200">
+            <Link to="/gallery" className="nav-link text-black hover:text-blue-600 transition-colors duration-200">
               GALLERY
             </Link>
-            <Link to="/contact" className="nav-link hover:text-blue-600 transition-colors duration-200">
+            <Link to="/contact" className="nav-link text-black hover:text-blue-600 transition-colors duration-200">
               CONTACT
             </Link>
-            <Link to="/faq" className="nav-link hover:text-blue-600 transition-colors duration-200">
+            <Link to="/faq" className="nav-link text-black hover:text-blue-600 transition-colors duration-200">
               FAQ
             </Link>
-            <Link to="/book-appointment" className="nav-link hover:text-blue-600 transition-colors duration-200">
-              BOOK NOW
+            <Link to="/book-appointment" className="nav-link text-black hover:text-blue-600 transition-colors duration-200">
+              ORDER NOW
             </Link>
             <Link to="/cart" className="relative">
-              <FiShoppingCart className="h-6 w-6" />
+              <FiShoppingCart className="h-6 w-6 text-red-600" />
               {cartItems.length > 0 && (
-                <span className="absolute -top-2 -right-2 bg-red-500 text-white rounded-full h-5 w-5 flex items-center justify-center text-xs">
+                <span className="absolute -top-2 -right-2 bg-red-600 text-white rounded-full h-5 w-5 flex items-center justify-center text-xs">
                   {cartItems.length}
                 </span>
               )}
             </Link>
           </div>
 
-          {/* Mobile Menu Button */}
+          {/* Mobile Menu Button with Cart */}
           <div className="md:hidden flex items-center space-x-4">
+            {/* Mobile Cart Button */}
+            <button
+              onClick={() => handleNavigation('/cart')}
+              className="relative p-1 text-black hover:text-red-700 transition-colors"
+            >
+              <FiShoppingCart className="h-6 w-6" />
+              {cartItems.length > 0 && (
+                <span className="absolute -top-1 -right-1 bg-red-600 text-white rounded-full h-5 w-5 flex items-center justify-center text-xs">
+                  {cartItems.length}
+                </span>
+              )}
+            </button>
+            
+            {/* Mobile Menu Toggle Button */}
             <button
               onClick={() => setIsOpen(!isOpen)}
-              className="p-2 bg-red-600 text-white rounded-full w-10 h-10 flex items-center justify-center"
+              className="p-2 bg-gray-800 text-white rounded-full w-10 h-10 flex items-center justify-center hover:bg-red-700 transition-colors"
             >
               {isOpen ? <FiX className="h-6 w-6" /> : <FiMenu className="h-6 w-6" />}
             </button>
@@ -164,7 +178,7 @@ function Navbar() {
         </div>
       </div>
 
-      {/* Mobile Navigation */}
+      {/* Mobile Navigation Menu */}
       {isMobile && (
         <div
           ref={mobileMenuRef}
@@ -235,6 +249,17 @@ function Navbar() {
               className="flex items-center nav-link bg-white text-black px-3 py-2 rounded-md hover:bg-blue-700 transition-colors w-full"
             >
               <FiCalendar className="mr-2" /> Book Now
+            </button>
+            <button
+              onClick={() => handleNavigation('/cart')}
+              className="flex items-center nav-link bg-white text-black px-3 py-2 rounded-md hover:bg-blue-700 transition-colors w-full"
+            >
+              <FiShoppingCart className="mr-2" /> Cart
+              {cartItems.length > 0 && (
+                <span className="ml-2 bg-red-500 text-white rounded-full h-5 w-5 flex items-center justify-center text-xs">
+                  {cartItems.length}
+                </span>
+              )}
             </button>
           </div>
         </div>
