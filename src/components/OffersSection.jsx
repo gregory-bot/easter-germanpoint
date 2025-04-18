@@ -9,16 +9,16 @@ function OffersSection() {
 
   const offers = [
     {
-      title: 'Your One-Stop Garage – Great Deals Await',
+      title: 'Where Every Bite Tells a Story – German Point',
       images: [
-        'https://i.postimg.cc/rFxWMKdK/LOGO.jpg',
-        'https://i.postimg.cc/jjmkwMTs/engine.jpg',
-        'https://i.postimg.cc/7hZDPxyC/paint.jpg',
-        'https://i.postimg.cc/ryxVnW0Z/paint.jpg',
-        'https://i.postimg.cc/zXszk9g9/carousel.jpg',
-        'https://i.postimg.cc/02C2fmtz/xx.jpg',
-        'https://i.postimg.cc/ZqWb4QJN/bbh.jpg',
-        'https://i.postimg.cc/sXS3ZZQD/batt.jpg',
+        'https://images.unsplash.com/photo-1599921841143-819065a55cc6?ixlib=rb-1.2.1&auto=format&fit=crop&w=1350&q=80',
+        'https://images.unsplash.com/photo-1630384060421-cb20d0e0649d?ixlib=rb-1.2.1&auto=format&fit=crop&w=1350&q=80',
+        'https://images.unsplash.com/photo-1592837101613-35f33e978e2f?ixlib=rb-1.2.1&auto=format&fit=crop&w=1350&q=80',
+        'https://images.unsplash.com/photo-1579208575657-c595a05383b7?ixlib=rb-1.2.1&auto=format&fit=crop&w=1350&q=80',
+        'https://images.unsplash.com/photo-1600271801401-65fe5f623a9a?ixlib=rb-1.2.1&auto=format&fit=crop&w=1350&q=80',
+        'https://images.unsplash.com/photo-1505253716362-afaea1d3d1af?ixlib=rb-1.2.1&auto=format&fit=crop&w=1350&q=80',
+        'https://images.unsplash.com/photo-1432139555190-58524dae6a55?ixlib=rb-1.2.1&auto=format&fit=crop&w=1350&q=80',
+        'https://images.pexels.com/photos/9967258/pexels-photo-9967258.jpeg?auto=compress&cs=tinysrgb&w=800',
       ],
     },
   ];
@@ -38,14 +38,14 @@ function OffersSection() {
       }`}
     >
       <h2
-        className="text-4xl bg-blue-100 mb-4"
+        className="text-2xl bg-blue-100 mb-4"
         style={{
           fontFamily: 'sans-serif',
           borderRadius: '12px',
           padding: '1rem',
         }}
       >
-        Keeping you on the road – Brenxx Auto Services
+        Authentic German Cuisine – A Taste of Tradition
       </h2>
 
       <div className="grid grid-cols-1 gap-4">
@@ -76,9 +76,9 @@ function OffersSection() {
       <div className="flex justify-between items-center mt-4">
         {/* Logo on the left */}
         <img
-          src="https://i.postimg.cc/gJCNMjt8/brenxlogo.jpg"
-          alt="BRENXX Logo"
-          className="h-8 w-auto"
+          src="https://i.postimg.cc/HxfZNvVV/logo-2.jpg"
+          alt="GermanPoint Logo"
+          className="h-10 w-auto"
         />
 
         {/* Button on the right */}

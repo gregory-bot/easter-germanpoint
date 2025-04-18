@@ -1,138 +1,150 @@
 import React, { useState, useEffect } from 'react';
 import { useNavigate } from 'react-router-dom';
+import { useCart } from '../context/CartContext'; // Import the cart context
 
 function OffersPage() {
   const navigate = useNavigate();
   const [isFading, setIsFading] = useState(true);
+  const { cartItems, addToCart } = useCart(); // Use the cart context
 
   const offers = [
     {
       id: 'offer1',
-      title: 'Full Car Service Package',
-      description: 'Comprehensive car service including oil change, brake check, and tire rotation.',
-      image: 'https://i.postimg.cc/jSD8CRvF/full.jpg',
+      title: 'Weekend Brunch Special',
+      description: 'Enjoy a delightful brunch with a variety of German delicacies and beverages.',
+      image: 'https://images.pexels.com/photos/1640777/pexels-photo-1640777.jpeg?auto=compress&cs=tinysrgb&w=600',
     },
     {
       id: 'offer2',
-      title: 'Engine Tune-Up Special',
-      description: 'Optimize your engine performance with our expert tune-up service.',
-      image: 'https://images.pexels.com/photos/159293/car-engine-motor-clean-customized-159293.jpeg?auto=compress&cs=tinysrgb&w=600',
+      title: 'Beer & Sausage Combo',
+      description: 'Pair your favorite German beer with our signature sausages at a discounted price.',
+      image: 'https://i.postimg.cc/FRJmGQCX/er.jpg',
     },
     {
       id: 'offer3',
-      title: 'Brake Repair Discount',
-      description: 'Get 20% off on brake pad replacement and brake system inspection.',
-      image: 'https://images.pexels.com/photos/4294075/pexels-photo-4294075.jpeg?auto=compress&cs=tinysrgb&w=600',
+      title: 'Family Feast Package',
+      description: 'A complete meal for the whole family, featuring authentic German dishes.',
+      image: 'https://i.postimg.cc/kGmrcRtW/family.jpg',
     },
     {
       id: 'offer4',
-      title: 'Car Facelift Package',
-      description: 'Prepare for facelift with our tire change and alignment service.',
-      image: 'https://media.istockphoto.com/id/946261062/photo/bottom-view-of-wheel-and-shock-absorber-of-vehicle.jpg?s=612x612&w=0&k=20&c=w-1POmKRJGzBLYRRDmyUPUcW0-2fGRuIDuLmyHsEP8U=',
+      title: 'Dessert Delight',
+      description: 'Indulge in our selection of German desserts, including Black Forest Cake and Apple Strudel.',
+      image: 'https://i.postimg.cc/5y1GvcZ3/desert.jpg',
     },
     {
       id: 'offer5',
-      title: 'AC Repair & Recharge',
-      description: 'Stay cool this summer with our AC repair and recharge service.',
-      image: 'https://media.istockphoto.com/id/1406024793/photo/working-of-servicing-car-air-conditioner-in-vehicle-auto-service-or-repair-workshop.jpg?b=1&s=612x612&w=0&k=20&c=DeExuWewF_upvaHP4zHjL16wEUDDAelQcuQI2wcLTHM=',
+      title: 'Lunch Buffet Offer',
+      description: 'Unlimited servings of German cuisine for lunch at an unbeatable price.',
+      image: 'https://i.postimg.cc/4Nfqxgv4/123.jpg',
     },
     {
       id: 'offer6',
-      title: '24/7 Towing Service',
-      description: 'Emergency towing available anytime, anywhere within the city limits.',
-      image: 'https://i.postimg.cc/mgVbZNXw/towing.jpg',
+      title: 'Happy Hour Specials',
+      description: 'Discounted drinks and appetizers every evening from 5 PM to 7 PM.',
+      image: 'https://i.postimg.cc/rprYPFTj/tuu.jpg',
     },
     {
       id: 'offer7',
-      title: 'Battery Replacement Offer',
-      description: 'High-quality battery replacement with free installation and disposal.',
-      image: 'https://media.istockphoto.com/id/859211670/photo/car-engine.jpg?s=612x612&w=0&k=20&c=bzGLxXhiy2JXXGFNzYDE257AJiGlRI_u67Y9J-w5oaA=',
+      title: 'Kids Eat Free',
+      description: 'Kids under 10 eat free with every adult meal purchased on Sundays.',
+      image: 'https://i.postimg.cc/m2gpGSRt/rt.jpg',
     },
     {
       id: 'offer8',
-      title: 'Wheel Alignment Checkup',
-      description: 'Precision wheel alignment for better handling and tire life.',
-      image: 'https://i.postimg.cc/6QcXYZ1y/wheel.jpg',
+      title: 'Oktoberfest Special',
+      description: 'Celebrate Oktoberfest with our exclusive beer and pretzel combo.',
+      image: 'https://i.postimg.cc/XNQxxyF3/oct.jpg',
     },
     {
       id: 'offer9',
-      title: 'Complete Car Detailing',
-      description: 'Interior and exterior detailing to make your car look brand new.',
-      image: 'https://i.postimg.cc/yNvMFHkR/deta.jpg',
+      title: 'Chef’s Tasting Menu',
+      description: 'Experience a curated menu of our chef’s finest German dishes.',
+      image: 'https://i.postimg.cc/L5XtGNfS/chef.jpg',
     },
     {
       id: 'offer10',
-      title: 'Suspension & Shock Repair',
-      description: 'Ensure a smooth ride with our suspension and shock absorber service.',
-      image: 'https://i.postimg.cc/CLS965k8/shock.jpg',
+      title: 'Takeaway Meal Deals',
+      description: 'Order your favorite German dishes to-go at discounted prices.',
+      image: 'https://i.postimg.cc/QM3pjX50/takeaway.jpg',
     },
     {
       id: 'offer11',
-      title: 'Headlight Restoration Service',
-      description: 'Restore dull or foggy headlights for improved night visibility and safety.',
-      image: 'https://images.pexels.com/photos/25580655/pexels-photo-25580655/free-photo-of-close-up-of-black-bmw-e30.jpeg?auto=compress&cs=tinysrgb&w=600',
+      title: 'Breakfast Platter',
+      description: 'Start your day with a hearty German breakfast platter.',
+      image: 'https://images.pexels.com/photos/4736381/pexels-photo-4736381.jpeg?auto=compress&cs=tinysrgb&w=600',
     },
     {
       id: 'offer12',
-      title: 'Oil & Filter Change Combo',
-      description: 'Premium engine oil and filter change at a discounted combo rate.',
-      image: 'https://media.istockphoto.com/id/948532736/photo/car-oil-filters-and-motor-oil-plastic-can-3d-illustration-3d-render-isolated-on-white.jpg?s=612x612&w=0&k=20&c=fC3vyOqlAO0TWoNsJoRW3gOvZ0ODM2aO6DuCyzyz4Lg=',
+      title: 'Grilled Sausage Platter',
+      description: 'A variety of grilled sausages served with mustard and sauerkraut.',
+      image: 'https://images.pexels.com/photos/20150375/pexels-photo-20150375/free-photo-of-meat-on-a-plate.jpeg?auto=compress&cs=tinysrgb&w=600',
     },
     {
       id: 'offer13',
-      title: 'Radiator Flush & Coolant Refill',
-      description: 'Prevent overheating with a full radiator flush and coolant top-up.',
-      image: 'https://media.istockphoto.com/id/465756690/photo/auto-mechanic-tests-car-antifreeze-liquid.jpg?s=612x612&w=0&k=20&c=FhAhAswKq6Kdu8vd41bOm7fMszx6tu4JtRaj98w3bnM=',
+      title: 'Seasonal Specials',
+      description: 'Enjoy seasonal German dishes made with fresh, local ingredients.',
+      image: 'https://i.postimg.cc/FF8DkkLK/wewe.jpg',
     },
     {
       id: 'offer14',
-      title: 'Exhaust System Inspection',
-      description: 'Check for leaks, rust, and performance issues in your exhaust system.',
-      image: 'https://media.istockphoto.com/id/2197738784/photo/car-exhaust-pipe-in-garage.jpg?s=612x612&w=0&k=20&c=i-hjL6-Mq23w5-Ky9PR6gcRMATBWXJTbMR_gsVbVNH8=',
+      title: 'Vegetarian Feast',
+      description: 'A selection of vegetarian German dishes for plant-based food lovers.',
+      image: 'https://i.postimg.cc/8zV4t8wQ/rere.jpg',
     },
     {
       id: 'offer15',
-      title: 'Windshield Crack Repair',
-      description: 'Fix minor windshield cracks before they spread. Quick and affordable.',
-      image: 'https://media.istockphoto.com/id/1333581015/photo/broken-windshield-of-a-car.jpg?s=612x612&w=0&k=20&c=E9YzN-Q99C1-PGVU7Q2SVP5tlg6l0lo5JRo_ucoATbs=',
+      title: 'Soup & Salad Combo',
+      description: 'A light and refreshing combo of German soups and salads.',
+      image: 'https://images.pexels.com/photos/18805698/pexels-photo-18805698/free-photo-of-food-served-on-the-plates.jpeg?auto=compress&cs=tinysrgb&w=600',
     },
     {
       id: 'offer16',
-      title: 'Transmission Fluid Change',
-      description: 'Extend transmission life with a professional fluid replacement service.',
-      image: 'https://media.istockphoto.com/id/1928800061/photo/refueling-and-pouring-oil-quality-into-the-engine-motor-car-transmission-and-maintenance-gear.jpg?s=612x612&w=0&k=20&c=uJXmXcz7Yn97i-RHaFlD7wpmtARVi285oCaxbiLUB6A=',
+      title: 'Bavarian Pretzel Basket',
+      description: 'Freshly baked Bavarian pretzels served with cheese dip.',
+      image: 'https://images.pexels.com/photos/30146218/pexels-photo-30146218/free-photo-of-delicious-sausage-platter-with-pretzel-and-beer.jpeg?auto=compress&cs=tinysrgb&w=600',
     },
     {
       id: 'offer17',
-      title: 'Clutch Inspection & Adjustment',
-      description: 'Smooth gear shifts start with a healthy clutch — get it inspected today.',
-      image: 'https://media.istockphoto.com/id/628470574/photo/change-and-repair-clutch-drive-axle-working-underneath-a-lifted.jpg?s=612x612&w=0&k=20&c=omz7ZKS8cNTIBVXl9vTW-r_2vmo1ie3rdP-q1-VG2pU=',
+      title: 'German Beer Flight',
+      description: 'Sample a variety of German beers with our beer flight.',
+      image: 'https://i.postimg.cc/CxLBFmxn/ty.jpg',
     },
     {
       id: 'offer18',
-      title: 'Pre-Purchase Car Inspection',
-      description: 'Buying a used car? Let our experts evaluate its condition before you commit.',
-      image: 'https://i.postimg.cc/TPVrSdry/inspect.jpg',
+      title: 'Schnitzel Special',
+      description: 'Crispy and golden schnitzel served with your choice of sides.',
+      image: 'https://media.istockphoto.com/id/1450360574/photo/portion-of-breaded-cutlet-milanesa-with-salad-served-on-table.jpg?b=1&s=612x612&w=0&k=20&c=i3b7YOHlUa4_0vdm40muas7zNRsnBoSkmE3Kt4nJHHQ=',
+    },
+    {
+      id: 'offer19',
+      title: 'German Chocolate Cake',
+      description: 'Rich and decadent German chocolate cake for dessert lovers.',
+      image: 'https://media.istockphoto.com/id/1326149453/photo/dark-chocolate-cake-slice.jpg?b=1&s=612x612&w=0&k=20&c=8uJnDHXZciSr9Hvq6qptHKqPakYzUk4fgWH_c2xDCMk=',
+    },
+    {
+      id: 'offer20',
+      title: 'Festive Feast',
+      description: 'Celebrate special occasions with our festive German feast.',
+      image: 'https://i.postimg.cc/0NS8xwDJ/fest.jpg',
     },
   ];
 
-
-  const handleBackHomeClick = () => {
-    setIsFading(true);
-    setTimeout(() => {
-      navigate('/');
-    }, 500);
-  };
-
-  const handleBookService = (offerId) => {
-    navigate(`/book-appointment?offer=${offerId}`);
-    window.scrollTo({ top: 0, behavior: 'smooth' }); // Scroll to the top of the page
+  const handleAddToCart = (offer) => {
+    addToCart({
+      id: offer.id,
+      name: offer.title,
+      price: 0, // You should add prices to your offers
+      image: offer.image,
+      quantity: 1
+    });
+    alert(`${offer.title} has been added to your cart!`);
   };
 
   useEffect(() => {
     const timeout = setTimeout(() => {
       setIsFading(false);
-    }, 300); // Smooth fade-in effect
+    }, 300);
     return () => clearTimeout(timeout);
   }, []);
 
@@ -143,16 +155,8 @@ function OffersPage() {
       }`}
     >
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-        <div className="flex justify-end mb-4">
-          <button
-            onClick={handleBackHomeClick}
-            className="bg-blue-600 hover:bg-blue-700 text-white px-4 py-2 rounded-md transition-colors duration-200"
-          >
-            BACK HOME
-          </button>
-        </div>
         <h1 className="text-3xl font-bold mb-8">Special Deals</h1>
-        <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-6">
+        <div className="grid grid-cols-2 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-6">
           {offers.map((offer) => (
             <div
               key={offer.id}
@@ -170,10 +174,10 @@ function OffersPage() {
                 <p className="text-gray-600 text-sm mb-4">{offer.description}</p>
                 <div className="flex justify-end">
                   <button
-                    onClick={() => handleBookService(offer.id)}
-                    className="bg-blue-500 hover:bg-green-600 text-white px-4 py-2 rounded-md text-sm transition-colors duration-300"
+                    onClick={() => handleAddToCart(offer)}
+                    className="bg-red-600 hover:bg-yellow-600 text-white px-3 py-2 rounded-md text-sm transition-colors duration-300"
                   >
-                    Book Service
+                    Add to Cart
                   </button>
                 </div>
               </div>
