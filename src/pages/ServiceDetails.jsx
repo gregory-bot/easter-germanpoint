@@ -1,920 +1,941 @@
 import { useEffect, useState } from 'react';
 import { useParams, useNavigate } from 'react-router-dom';
-const carRepairServices = [
-  {
-    id: 'crs1',
-    title: 'Oil Change & Filter Replacement',
-    description: 'Regular oil and filter changes to ensure optimal engine performance and longevity.',
-    image: 'https://media.istockphoto.com/id/1319354325/photo/refueling-and-pouring-oil-quality-into-the-engine-motor-car-transmission-and-maintenance-gear.jpg?s=612x612&w=0&k=20&c=Q9sCpWkbJP4B5mrX_gFznI8QJGOCcGtVmqkvCN20z68='
-  },
-  {
-    id: 'crs2',
-    title: 'Brake Inspection & Repair',
-    description: 'Complete brake service including pads, rotors, and brake fluid check.',
-    image: 'https://i.postimg.cc/BnsFJJh2/hh.jpg'
-  },
-  {
-    id: 'crs3',
-    title: 'Suspension & Steering Service',
-    description: 'Shock absorber replacement and steering system alignment for smoother rides.',
-    image: 'https://images.pexels.com/photos/8986137/pexels-photo-8986137.jpeg?auto=compress&cs=tinysrgb&w=1260&h=750&dpr=1'
-  },
-  {
-    id: 'crs4',
-    title: 'Transmission Repair',
-    description: 'Manual and automatic transmission diagnostics and repairs.',
-    image: 'https://images.pexels.com/photos/4116203/pexels-photo-4116203.jpeg?auto=compress&cs=tinysrgb&w=1260&h=750&dpr=1'
-  },
-  {
-    id: 'crs5',
-    title: 'Radiator & Cooling System Service',
-    description: 'Coolant flush, radiator repair, and cooling system pressure test.',
-    image: 'https://i.postimg.cc/PqDnKkjF/hhf.jpg'
-  },
-  {
-    id: 'crs6',
-    title: 'Exhaust System Repair',
-    description: 'Fixing mufflers, catalytic converters, and exhaust leaks.',
-    image: 'https://images.pexels.com/photos/17575953/pexels-photo-17575953/free-photo-of-close-up-of-car-engine.jpeg?auto=compress&cs=tinysrgb&w=1260&h=750&dpr=1'
-  },
-  {
-    id: 'crs7',
-    title: 'Wheel Alignment & Balancing',
-    description: 'Precision wheel alignment and tire balancing for better fuel efficiency.',
-    image: 'https://i.postimg.cc/PqVwr8x0/gg.jpg'
-  },
-  {
-    id: 'crs8',
-    title: 'Clutch Replacement',
-    description: 'Clutch plate and pressure plate replacement for smoother gear shifts.',
-    image: 'https://images.pexels.com/photos/11074558/pexels-photo-11074558.jpeg?auto=compress&cs=tinysrgb&w=600'
-  },
-  {
-    id: 'crs9',
-    title: 'Engine Overhaul',
-    description: 'Complete engine disassembly, inspection, and rebuilding for better performance.',
-    image: 'https://i.postimg.cc/jjmkwMTs/engine.jpg'
-  },
-  {
-    id: 'crs10',
-    title: 'Timing Belt Replacement',
-    description: 'Replacing worn timing belts to prevent engine failure.',
-    image: 'https://images.pexels.com/photos/188777/pexels-photo-188777.jpeg?auto=compress&cs=tinysrgb&w=1260&h=750&dpr=1'
-  },
-  {
-    id: 'crs11',
-    title: 'Fuel System Cleaning',
-    description: 'Cleaning fuel injectors and throttle body for improved fuel efficiency.',
-    image: 'https://i.postimg.cc/xdB14Gqj/xx.jpg'
-  },
-  {
-    id: 'crs12',
-    title: 'AC System Repair',
-    description: 'AC gas refilling, compressor service, and leak fixing for optimal cooling.',
-    image: 'https://images.pexels.com/photos/24286596/pexels-photo-24286596/free-photo-of-car-engine-and-parts-under-the-hood.jpeg?auto=compress&cs=tinysrgb&w=1260&h=750&dpr=1'
-  }
-];
+const germanSpecialties = [
+    {
+      id: 'gs1',
+      title: 'German Sausage Platter',
+      price: 1200,
+      description: 'Assorted German sausages',
+      image: 'https://images.unsplash.com/photo-1597362925123-77861d3fbac7?ixlib=rb-1.2.1&auto=format&fit=crop&w=1350&q=80',
+    },
+    {
+      id: 'gs2',
+      title: 'Wiener Schnitzel',
+      price: 1300,
+      description: 'Served with your Choice of Fries, Potato or Green Salad & tartar sauce',
+      image: 'https://images.unsplash.com/photo-1599921841143-819065a55cc6?ixlib=rb-1.2.1&auto=format&fit=crop&w=1350&q=80',
+    },
+    {
+      id: 'gs3',
+      title: 'Hunter Style Schnitzel',
+      price: 1300,
+      description: 'Topped with mushroom sauce. Served with your Choice of fries or mashed potato',
+      image: 'https://images.unsplash.com/photo-1585325701956-60dd9c8553bc?ixlib=rb-1.2.1&auto=format&fit=crop&w=1350&q=80',
+    },
+  ];
 
 
-const mechElectricalServices = [
-  {
-    id: 'me1',
-    title: 'Battery and Alternator Testing',
-    description: 'Check battery health, voltage output, and alternator performance to prevent starting issues.',
-    image: 'https://media.istockphoto.com/id/597221852/photo/generator-diagnostic-eguipment.jpg?s=612x612&w=0&k=20&c=3Y4lgPIMf5VVpOF4fnZSiOBKRH5MJa5J2OmJmalA1Jc='
-  },
-  {
-    id: 'me2',
-    title: 'Starter Motor Repair',
-    description: 'Repair or replace faulty starter motors to ensure reliable engine cranking.',
-    image: 'https://media.istockphoto.com/id/1453770972/photo/jumping-battery-car.jpg?s=612x612&w=0&k=20&c=8XxZCT-yPLJs2kDrZVIOf6MBxZrfyPjiabCp3dmR7rI='
-  },
-  {
-    id: 'me3',
-    title: 'Sensor and Fuse Replacement',
-    description: 'Diagnose and replace malfunctioning sensors and blown fuses across all systems.',
-    image: 'https://media.istockphoto.com/id/1485453373/photo/auto-repairman-checks-the-fuse-in-electrical-system-of-car.jpg?s=612x612&w=0&k=20&c=un69ME1dij7CcZn9kyli3MR_dVXRXSZfliK_46cNE6I='
-  },
-  {
-    id: 'me4',
-    title: 'Engine Fault Diagnosis',
-    description: 'Computerized diagnostics to identify engine issues quickly and accurately.',
-    image: 'https://i.postimg.cc/zvv5DVy2/bbb.jpg'
-  },
-  {
-    id: 'me5',
-    title: 'Ignition System Repair',
-    description: 'Fixing spark plugs, coils, and ignition timing for smooth engine performance.',
-    image: 'https://media.istockphoto.com/id/2168506792/photo/close-up-of-hydraulic-valve-internal-in-engine-of-the-car-to-adjust-the-ignition.jpg?s=612x612&w=0&k=20&c=zWt4eq9u6a4tlDY6mcLiSythVgWUuvTvVUfyUB4FfLs='
-  },
-  {
-    id: 'me6',
-    title: 'Wiring & Electrical Fault Repair',
-    description: 'Troubleshooting shorts, open circuits, and damaged wiring harnesses.',
-    image: 'https://images.pexels.com/photos/6110229/pexels-photo-6110229.jpeg?auto=compress&cs=tinysrgb&w=600'
-  },
-  {
-    id: 'me7',
-    title: 'Headlight & Taillight Electrical Fix',
-    description: 'Repair or replace lighting circuits, switches, and bulb holders.',
-    image: 'https://media.istockphoto.com/id/497953085/photo/taillights-car-accident.jpg?s=612x612&w=0&k=20&c=C_my9NagAvuDecaYjsxHAh5Bae0LUsegEOOnSMTsODg='
-  },
-  {
-    id: 'me8',
-    title: 'Power Window & Lock Repair',
-    description: 'Fix electrical faults in window regulators and central locking systems.',
-    image: 'https://i.postimg.cc/Mp1d38Dn/window.jpg'
-  },
-  {
-    id: 'me9',
-    title: 'ECU Programming & Replacement',
-    description: 'Reprogramming or replacing engine control units for better performance and diagnostics.',
-    image: 'https://media.istockphoto.com/id/1992953381/photo/car-computer-repair-shop.jpg?s=612x612&w=0&k=20&c=jCQEjWAAfd8Ssc49j9GghsAMGJ3WuYrXN15ywdLazbI='
-  },
-  {
-    id: 'me10',
-    title: 'Instrument Cluster Repair',
-    description: 'Repair faulty speedometers, fuel gauges, and dashboard displays.',
-    image: 'https://media.istockphoto.com/id/2161151225/photo/tangled-electronic-wiring-and-used-connectors-connector-for-wiring-used-spare-part-of-the.jpg?s=612x612&w=0&k=20&c=3yAB55mT54cu9oG4LufASv_p-NE-4-EgpxYD4WXxjvA='
-  },
-  {
-    id: 'me11',
-    title: 'Electric Cooling Fan Repair',
-    description: 'Diagnose and repair fan motors, relays, and temperature sensors.',
-    image: 'https://media.istockphoto.com/id/1833004760/photo/the-engine-cooling-fan-is-prepared-for-installation-under-the-hood-of-a-car-machine.jpg?s=612x612&w=0&k=20&c=9N1OXXEham3qYUG-2riuJNEGUlCpJUpI4unf06T9CDM='
-  },
-  {
-    id: 'me12',
-    title: 'Charging System Inspection',
-    description: 'Complete inspection of alternator, battery terminals, and voltage regulator.',
-    image: 'https://images.pexels.com/photos/12658309/pexels-photo-12658309.jpeg?auto=compress&cs=tinysrgb&w=600'
-  }
-];
+const breakfast = [
+    {
+      id: 'bf1',
+      title: 'Breakfast',
+      price: 900,
+      description: 'Bacon, Eggs, Sausages, Beans & Toast',
+      image: 'https://images.unsplash.com/photo-1588503823575-2744851a4b56?q=80&w=3203&auto=format&fit=crop&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D',
+    },
+  ];
 
 
-const paintBodyServices = [
-  {
-    id: 'pb1',
-    title: 'Full Body Respray',
-    description: 'Complete respray of the entire vehicle with premium automotive paint.',
-    image: 'https://i.postimg.cc/7hZDPxyC/paint.jpg'
-  },
-  {
-    id: 'pb2',
-    title: 'Scratch and Dent Removal',
-    description: 'Removal of minor scratches and dents with paint blending for a flawless finish.',
-    image: 'https://images.pexels.com/photos/12953618/pexels-photo-12953618.jpeg?auto=compress&cs=tinysrgb&w=1260&h=750&dpr=1'
-  },
-  {
-    id: 'pb3',
-    title: 'Bumper Repair and Repaint',
-    description: 'Repair cracked or scuffed bumpers and repaint to match original color.',
-    image: 'https://i.postimg.cc/jjfHL0rv/IMG-20250227-WA0032-1.jpg'
-  },
-  {
-    id: 'pb4',
-    title: 'Panel Beating',
-    description: 'Restore damaged panels to their original shape using precision tools.',
-    image: 'https://i.postimg.cc/j209m2zJ/mm.jpg'
-  },
-  {
-    id: 'pb5',
-    title: 'Paint Touch-Up',
-    description: 'Small area paint correction and touch-up using color-matched paints.',
-    image: 'https://i.postimg.cc/bvZBvkgt/vv.jpg'
-  },
-  {
-    id: 'pb6',
-    title: 'Rust Removal & Treatment',
-    description: 'Elimination of rust spots and application of anti-rust coating.',
-    image: 'https://i.postimg.cc/PJQ674XB/bbv.jpg'
-  },
-  {
-    id: 'pb7',
-    title: 'Car Polishing & Buffing',
-    description: 'Restore paint shine and remove surface swirls with machine polishing.',
-    image: 'https://i.postimg.cc/BvPm3sZ5/ll.jpg'
-  },
-  {
-    id: 'pb8',
-    title: 'Paintless Dent Removal (PDR)',
-    description: 'Remove minor dents without affecting factory paint using PDR tools.',
-    image: 'https://i.postimg.cc/2SVwdmWp/yy.jpg'
-  },
-  {
-    id: 'pb9',
-    title: 'Clear Coat Application',
-    description: 'Protect your paint job with a durable and glossy clear coat layer.',
-    image: 'https://i.postimg.cc/TYPqGGCy/cc.jpg'
-  },
-  {
-    id: 'pb10',
-    title: 'Headlight Restoration',
-    description: 'Buff and polish cloudy headlights to restore brightness and clarity.',
-    image: 'https://i.postimg.cc/sD1Sqmg7/gf.jpg'
-  },
-  {
-    id: 'pb11',
-    title: 'Custom Color Mixing',
-    description: 'Personalized paint mixing service to match or create custom vehicle colors.',
-    image: 'https://media.istockphoto.com/id/488177095/photo/set-of-3d-hatchback-car.jpg?s=612x612&w=0&k=20&c=KkjJk35I_yVbbNYGaQ1je_AnbXY4VKSpkGBsuXeHOCo='
-  },
-  {
-    id: 'pb12',
-    title: 'Body Panel Replacement',
-    description: 'Replacement of severely damaged doors, fenders, or hood with paint-matched panels.',
-    image: 'https://media.istockphoto.com/id/1358131581/photo/automobile-repairman-painter-hand-in-protective-glove-with-airbrush-pulverizer-painting-car.jpg?s=612x612&w=0&k=20&c=EqRUiuFY7nvP91EJwRMRIefvcnznazfP6Zindvanopw='
-  },
-  {
-    id: 'pb13',
-    title: 'Roof & Bonnet Respray',
-    description: 'Repaint faded or damaged roof and bonnet with factory-grade finish.',
-    image: 'https://media.istockphoto.com/id/952750538/photo/stains-on-the-hood.jpg?s=612x612&w=0&k=20&c=ooueitHxmBzNB7EizKGsNR0HMNUcrC9HNnu4LxgXDT4='
-  },
-  {
-    id: 'pb14',
-    title: 'Ceramic Coating',
-    description: 'Protect your vehicle’s paint with a long-lasting ceramic shield.',
-    image: 'https://i.postimg.cc/1XmwC8VY/IMG-20250228-WA0000.jpg'
-  }
-];
+  const soups = [
+      {
+        id: 's1',
+        title: 'Tomato Soup',
+        price: 600,
+        description: 'Classic tomato soup',
+        image: 'https://images.unsplash.com/photo-1547592166-23ac45744acd?ixlib=rb-1.2.1&auto=format&fit=crop&w=1350&q=80',
+      },
+      {
+        id: 's2',
+        title: 'Beef Goulash',
+        price: 900,
+        description: 'Served with baguette slices',
+        image: 'https://images.unsplash.com/photo-1633436374961-09b92742047b?ixlib=rb-1.2.1&auto=format&fit=crop&w=1350&q=80',
+      },
+      {
+        id: 's3',
+        title: 'Vegetable Soup',
+        price: 400,
+        description: 'A healthy and hearty vegetable soup',
+        image: 'https://plus.unsplash.com/premium_photo-1700673590238-a0e3a3795ae2?q=80&w=3270&auto=format&fit=crop&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D',
+      },
+      {
+        id: 's4',
+        title: 'Wonton Soup',
+        price: 500,
+        description: 'Delicious wonton soup with your choice of filling',
+        options: ['Vegetable', 'Chicken', 'Pork', 'Prawn'],
+        image: 'https://images.unsplash.com/photo-1559948271-7d5c98d2e951?q=80&w=3174&auto=format&fit=crop&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D',
+      },
+      {
+        id: 's5',
+        title: 'Hot & Sour Soup',
+        price: 500,
+        description: 'A tangy and spicy soup with your choice of filling',
+        options: ['Vegetable', 'Chicken'],
+        image: 'https://images.pexels.com/photos/539451/pexels-photo-539451.jpeg?auto=compress&cs=tinysrgb&w=1260&h=750&dpr=2',
+      },
+      {
+        id: 's6',
+        title: 'Noodle Soup',
+        price: 1250,
+        description: 'Flavorful noodle soup with your choice of protein',
+        options: ['Chicken', 'Pork', 'Beef'],
+        image: 'https://images.pexels.com/photos/699953/pexels-photo-699953.jpeg?auto=compress&cs=tinysrgb&w=1260&h=750&dpr=2',
+      },
+    ];
 
 
-
-const diagnosticServices = [
-  {
-    id: 'vd1',
-    title: 'Engine Diagnostics',
-    description: 'Comprehensive engine scan to detect misfires, sensor faults, and performance issues.',
-    image: 'https://media.istockphoto.com/id/1350239751/photo/car-diagnostic-service-and-electronics-repair.jpg?s=612x612&w=0&k=20&c=6xSgzMp9KJJ8lN0hC1UcuqXuuZMLNFCgCkcju-Q0BTU='
-  },
-  {
-    id: 'vd2',
-    title: 'Check Engine Light Inspection',
-    description: 'Identify and resolve the reason behind your illuminated check engine light.',
-    image: 'https://media.istockphoto.com/id/1181213164/vector/car-dashboard-warning-lights-icons-set-vector-illustration-image-vehicle-service-logo.jpg?s=612x612&w=0&k=20&c=lQCvj1bE1ZEJZDRH-ZCZqRClTgr6b3tBQYncdo9yBRU='
-  },
-  {
-    id: 'vd3',
-    title: 'ABS & Brake System Scan',
-    description: 'Diagnose ABS faults and check brake system sensors for optimal safety.',
-    image: 'https://media.istockphoto.com/id/1258023748/photo/car-disassembly-brake-disc-and-brake-caliper-removed-selective-focus.jpg?s=612x612&w=0&k=20&c=v4hWMgCJ-KG2l_m0UfTHf-LPFCYkPCUzg-v1fsU5Oi8='
-  },
-  {
-    id: 'vd4',
-    title: 'Transmission Diagnostics',
-    description: 'Analyze transmission shifting issues and perform error code analysis.',
-    image: 'https://media.istockphoto.com/id/2169327387/photo/automatic-change-of-brake-fluid-in-a-car-service.jpg?s=612x612&w=0&k=20&c=UCMNwqei059A9lRRBsFHjI6C_dyYe5vClHaBuf8w-Xs='
-  },
-  {
-    id: 'vd5',
-    title: 'Battery & Charging System Test',
-    description: 'Check battery health, alternator output, and charging system performance.',
-    image: 'https://media.istockphoto.com/id/1213122410/photo/technician-measure-voltage-of-battery-in-the-car-at-service-station.jpg?s=612x612&w=0&k=20&c=GDNklQ8acHuFrsCcOXe2i4wSUqrzdx8kTed7rFPQKc8='
-  },
-  {
-    id: 'vd6',
-    title: 'OBD-II Code Scan',
-    description: 'On-board diagnostics scan for trouble codes with professional analysis.',
-    image: 'https://media.istockphoto.com/id/1169030169/vector/suv-check-engine-light-abs-airbag-engine-oil-obdii-scanner-tool-being-used-on-an-open-engine.jpg?s=612x612&w=0&k=20&c=LBQwjrIxm1795p2wpwqch99MAIVtmppmUA0FvvnnVkg='
-  },
-  {
-    id: 'vd7',
-    title: 'Fuel System Diagnostics',
-    description: 'Evaluate fuel pressure, injector performance, and fuel economy issues.',
-    image: 'https://media.istockphoto.com/id/2171225591/photo/engine-components-and-wiring-in-a-vehicle-being-serviced-at-a-garage.jpg?s=612x612&w=0&k=20&c=ouXq9iFTa2F2joRUC6PQhOl5tA2i9q3n_PoPVcxhxMw='
-  },
-  {
-    id: 'vd8',
-    title: 'Airbag System Scan',
-    description: 'Check SRS system for faults and ensure airbag readiness.',
-    image: 'https://media.istockphoto.com/id/1599919768/photo/air-bag-sign-on-the-steering-wheel.jpg?s=612x612&w=0&k=20&c=IqxCnhkeN5oM4JZy8KQT3GCd5xuGgnTvLrZaFa7pp6M='
-  },
-  {
-    id: 'vd9',
-    title: 'Emission System Check',
-    description: 'Verify your vehicle meets emission standards and resolve pollution-related issues.',
-    image: 'https://media.istockphoto.com/id/2083930218/photo/auto-mechanic-monitor-to-check-and-fixed-car-air-conditioner-system-in-car-garage-service-car.jpg?s=612x612&w=0&k=20&c=Ho-reXJyKDs_gZdbn8X4HRYSFLy5uJtWxYmwXOYrq_0='
-  },
-  {
-    id: 'vd10',
-    title: 'Cooling System Diagnostics',
-    description: 'Scan radiator, thermostat, and coolant sensors for overheating issues.',
-    image: 'https://media.istockphoto.com/id/1168556251/photo/check-car-air-conditioning-system-refrigerant-recharge.jpg?s=612x612&w=0&k=20&c=RApZuCMS0gYqD12FBpsfGL5Rn4-InLkeBQJvBMtdegQ='
-  },
-  {
-    id: 'vd11',
-    title: 'Sensor & Module Diagnostics',
-    description: 'Full diagnostic of electronic control modules and vehicle sensors.',
-    image: 'https://media.istockphoto.com/id/1058523950/photo/car-engine-close-up.jpg?s=612x612&w=0&k=20&c=84Ky-vYXzY21-h8IDu3XsdibEQmS7V2aI4tCWbLNXkw='
-  },
-  {
-    id: 'vd12',
-    title: 'Steering & Suspension Diagnostic',
-    description: 'Identify issues in steering electronics and suspension modules.',
-    image: 'https://media.istockphoto.com/id/2002640073/photo/car-engine-suspension-during-vehicle-maintenance.jpg?s=612x612&w=0&k=20&c=D7gpRn6p7eBJ0tYFGpxk7Tz1SQ4IGTmQUX0tsZRXPKU='
-  },
-  {
-    id: 'vd13',
-    title: 'Climate Control System Check',
-    description: 'Diagnose HVAC system errors and ensure consistent cabin temperature.',
-    image: 'https://i.postimg.cc/659wpbv4/zz.jpg'
-  },
-  {
-    id: 'vd14',
-    title: 'Pre-Purchase Diagnostic Inspection',
-    description: 'Get a full digital diagnostic report before buying a used vehicle.',
-    image: 'https://i.postimg.cc/mZpVPtc3/yyjj.jpg'
-  }
-];
+    const lightMealsAndSnacks = [
+        {
+          id: 'lm1',
+          title: 'Chips',
+          price: 350,
+          description: 'Classic French fries',
+          image: 'https://images.unsplash.com/photo-1630384060421-cb20d0e0649d?ixlib=rb-1.2.1&auto=format&fit=crop&w=1350&q=80',
+        },
+        {
+          id: 'lm2',
+          title: 'Roast Potatoes',
+          price: 500,
+          description: 'Crispy roasted potatoes',
+          image: 'https://images.unsplash.com/photo-1592837101613-35f33e978e2f?ixlib=rb-1.2.1&auto=format&fit=crop&w=1350&q=80',
+        },
+        {
+          id: 'lm3',
+          title: 'Fried Veg Samosa (large)',
+          price: 100,
+          description: 'Vegetable-filled pastry',
+          image: 'https://images.unsplash.com/photo-1601050690597-df0568f70950?ixlib=rb-1.2.1&auto=format&fit=crop&w=1350&q=80',
+        },
+        {
+          id: 'lm4',
+          title: 'Sausage Beef / Pork',
+          price: 100,
+          description: 'Choice of beef or pork sausage',
+          image: 'https://images.unsplash.com/photo-1588347785102-2944ba63d0c4?ixlib=rb-1.2.1&auto=format&fit=crop&w=1350&q=80',
+        },
+        {
+          id: 'lm5',
+          title: 'Hotdog Beef or Pork',
+          price: 500,
+          description: 'Classic hotdog with choice of meat',
+          image: 'https://images.unsplash.com/photo-1619740455993-9e612b1af08a?ixlib=rb-1.2.1&auto=format&fit=crop&w=1350&q=80',
+        },
+        {
+          id: 'lm6',
+          title: 'Chicken Nuggets with Chips',
+          price: 600,
+          description: 'Crispy chicken nuggets served with fries',
+          image: 'https://images.unsplash.com/photo-1562967914-608f82629710?ixlib=rb-1.2.1&auto=format&fit=crop&w=1350&q=80',
+        },
+      ];
 
 
-const accidentRepairServices = [
-  {
-    id: 'ar1',
-    title: 'Emergency Towing Service',
-    description: '24/7 emergency towing for broken down or accident-damaged vehicles.',
-    image: 'https://media.istockphoto.com/id/466387691/photo/tow-truck-wreck.jpg?s=612x612&w=0&k=20&c=xgx9vJb-9C82Jp3MEUvgax-q_FcpdOU29BdG6Pj1RRc='
-  },
-  {
-    id: 'ar2',
-    title: 'Long-Distance Vehicle Towing',
-    description: 'Safe and reliable long-distance towing for your vehicle across cities.',
-    image: 'https://i.postimg.cc/mgVbZNXw/towing.jpg'
-  },
-  {
-    id: 'ar3',
-    title: 'Fender Repair',
-    description: 'Straightening and refinishing dented or crumpled fenders.',
-    image: 'https://media.istockphoto.com/id/183413919/photo/crashed-car.jpg?s=612x612&w=0&k=20&c=pNynsWFmbQzbGRAvLNBH6ZqsuOtLUIiJpO0f4KZDQCI='
-  },
-  {
-    id: 'ar4',
-    title: 'Windshield Replacement',
-    description: 'Complete windshield replacement with high-quality glass.',
-    image: 'https://i.postimg.cc/7LNnw682/shi.jpg'
-  },
-  {
-    id: 'ar5',
-    title: 'Headlight & Taillight Repair',
-    description: 'Fix or replace cracked or broken lights due to collision.',
-    image: 'https://media.istockphoto.com/id/2197106106/photo/severely-damaged-rear-car-panel-and-taillight.jpg?s=612x612&w=0&k=20&c=nfkxHo6oDFVMy_iJw_zb87qk-Km-SGQj28wOCkmr7QI='
-  },
-  {
-    id: 'ar6',
-    title: 'Chassis Straightening',
-    description: 'Realign the vehicle frame for structural integrity.',
-    image: 'https://media.istockphoto.com/id/2170656686/photo/close-up-of-car-underbody-on-the-lift-at-car-service-station.jpg?s=612x612&w=0&k=20&c=t3ivZrsOPdaqDnAqxlSnDhaGTf0aAgmZelhppDmd0ts='
-  },
-  {
-    id: 'ar7',
-    title: 'Paintless Dent Removal',
-    description: 'Smooth out minor dents without needing paintwork.',
-    image: 'https://media.istockphoto.com/id/2158743215/photo/a-photo-of-paintless-dent-removal-glue-pucks-repairing-hail-damage-of-the-silver-car-in-the.jpg?s=612x612&w=0&k=20&c=1B72m9hBWLeumwWYhLptPlsSDP4JSTJUQ2d-Y_bZTRE='
-  },
-  {
-    id: 'ar8',
-    title: 'Panel Beating',
-    description: 'Professional reshaping and aligning of body panels.',
-    image: 'https://i.postimg.cc/63vRT5Fc/dd.jpg'
-  },
-  {
-    id: 'ar9',
-    title: 'Crash Sensor Reset',
-    description: 'Recalibrate and reset safety systems post-accident.',
-    image: 'https://media.istockphoto.com/id/2183350152/photo/close-up-of-car-dashboard-speedometer-and-tachometer-modern-car-interior.jpg?s=612x612&w=0&k=20&c=G18iZYh91r3JiFcVPHHUu0KB-uAqzyeCu_y0Bl4jcXg='
-  },
-  {
-    id: 'ar10',
-    title: 'Airbag System Reinstallation',
-    description: 'Install new airbags and test system functionality.',
-    image: 'https://media.istockphoto.com/id/1924376056/photo/modern-car-showing-airbag-inside.jpg?s=612x612&w=0&k=20&c=vkbhygqQvzH8FW0hRXoAc5didsK8SErQjSM_MYZB9Gk='
-  },
-  {
-    id: 'ar11',
-    title: 'Paint Restoration',
-    description: 'Repaint accident-affected areas to match factory finish.',
-    image: 'https://i.postimg.cc/7hZDPxyC/paint.jpg'
-  },
-  {
-    id: 'ar12',
-    title: 'Insurance Claim Support',
-    description: 'Assistance with documentation and repair process for claims.',
-    image: 'https://media.istockphoto.com/id/2062364285/photo/car-accident-and-insurance-money.jpg?s=612x612&w=0&k=20&c=b1OJx2-T3L9EIyM9mXcj5zJco_eaPHdBojJs2UMY01g='
-  },
-  {
-    id: 'ar13',
-    title: 'Wheel Alignment Check',
-    description: 'Ensure accurate wheel alignment post-collision.',
-    image: 'https://i.postimg.cc/zDkv7gwW/tt.jpg'
-  },
-  {
-    id: 'ar14',
-    title: 'Side Mirror Repair',
-    description: 'Replace or fix damaged side mirrors from accidents.',
-    image: 'https://media.istockphoto.com/id/2182443174/photo/car-mirror-is-broken-need-reper.jpg?s=612x612&w=0&k=20&c=diwxVUntOqDvLcQ4RsMySbXgJY-prhxrFMt3EIoflfU='
-  },
-  {
-    id: 'ar15',
-    title: 'Underbody Inspection',
-    description: 'Inspect and repair any underbody damage post-crash.',
-    image: 'https://media.istockphoto.com/id/1140032073/photo/view-of-car-undercarriage-when-lifted-on-hydraulic-lift-in-a-workshop-during-inspection.jpg?s=612x612&w=0&k=20&c=ALR6ttrUP9866LAI0aaiRA_1UsBAR6tvSqK1xSVaNyI='
-  },
-  {
-    id: 'ar16',
-    title: 'Post-Repair Road Test',
-    description: 'Road test to ensure vehicle drives smoothly after repairs.',
-    image: 'https://media.istockphoto.com/id/1448524803/vector/failure-in-education-do-not-pass-car-exam-flat-cartoon-vector-illustration-adolescent-girl.jpg?s=612x612&w=0&k=20&c=13mbshv3IoWZZrnTh6Q2h8jB14Ru_2k_BOrnKmIvd_8='
-  },
-  {
-    id: 'ar17',
-    title: 'Full Body Damage Repair',
-    description: 'Complete repair and restoration of vehicle body after accidents.',
-    image: 'https://i.postimg.cc/BvXbqB45/after-acc.jpg'
-  },
-  {
-    id: 'ar18',
-    title: 'Bumper Replacement & Repair',
-    description: 'Fixing or replacing damaged front and rear bumpers.',
-    image: 'https://media.istockphoto.com/id/1387858012/photo/new-plastic-car-bumper-on-white-background.jpg?s=612x612&w=0&k=20&c=YrMbOpFL7v3ubWRYfEcWAudyrITw3iaWzxWglYuaZLk='
-  }
-];
+      const chicken = [
+        {
+          id: 'ch1',
+          title: 'Grilled Chicken',
+          price: 1200,
+          description: 'Served with sautéed onions and tomatoes',
+          image: 'https://images.unsplash.com/photo-1598515214211-89d3c73ae83b?ixlib=rb-1.2.1&auto=format&fit=crop&w=1350&q=80',
+        },
+        {
+          id: 'ch2',
+          title: 'Quarter Chicken',
+          price: 650,
+          description: 'Grilled quarter chicken',
+          image: 'https://plus.unsplash.com/premium_photo-1695931841253-1e17e7ed59b5?q=80&w=3270&auto=format&fit=crop&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D',
+        },
+        {
+          id: 'ch3',
+          title: 'Half Chicken',
+          price: 950,
+          description: 'Grilled half chicken',
+          image: 'https://images.unsplash.com/photo-1598515214146-dab39da1243d?ixlib=rb-1.2.1&auto=format&fit=crop&w=1350&q=80',
+        },
+        {
+          id: 'ch4',
+          title: 'Chicken Burger with Cheese',
+          price: 850,
+          description: 'Garnished with sautéed onions and tomatoes',
+          image: 'https://images.unsplash.com/photo-1572802419224-296b0aeee0d9?ixlib=rb-1.2.1&auto=format&fit=crop&w=1350&q=80',
+        },
+        {
+          id: 'ch5',
+          title: 'Butter Chicken (Murgh Mahal)',
+          price: 1250,
+          description: 'Chicken Breast Cubes in spicy, rich tomato, butter and cream gravy',
+          image: 'https://images.pexels.com/photos/9967258/pexels-photo-9967258.jpeg?auto=compress&cs=tinysrgb&w=800',
+        },
+        {
+          id: 'ch6',
+          title: 'Chicken Tikka Masala',
+          price: 1250,
+          description: 'Tandoored Chicken Breast Cubes in a spicy masala gravy',
+          image: 'https://images.pexels.com/photos/20371512/pexels-photo-20371512/free-photo-of-top-view-of-a-plate-with-roasted-chicken.jpeg?auto=compress&cs=tinysrgb&w=1260&h=750&dpr=2',
+        },
+        {
+          id: 'ch7',
+          title: 'Coconut Cream Chicken',
+          price: 1250,
+          description: 'Chicken Breast Cubes in a creamy coconut enriched gravy',
+          image: 'https://images.pexels.com/photos/718742/pexels-photo-718742.jpeg?auto=compress&cs=tinysrgb&w=1260&h=750&dpr=2',
+        },
+        {
+          id: 'ch8',
+          title: 'Chicken Vindaloo',
+          price: 1250,
+          description: 'Chicken Breast Cubes in hot tangy vindaloo gravy',
+          image: 'https://images.pexels.com/photos/6210876/pexels-photo-6210876.jpeg',
+        },
+        {
+          id: 'ch9',
+          title: 'Dry Chili Garlic Chicken',
+          price: 1250,
+          description: 'Chicken Breast Cubes cooked with spices, garlic, chili, tomato, and onion',
+          image: 'https://images.pexels.com/photos/2232433/pexels-photo-2232433.jpeg?auto=compress&cs=tinysrgb&w=1260&h=750&dpr=2',
+        },
+        {
+          id: 'ch10',
+          title: 'Chicken Korma',
+          price: 1250,
+          description: 'Chicken Breast Cubes in creamy cashew nut gravy',
+          image: 'https://images.pexels.com/photos/106343/pexels-photo-106343.jpeg',
+        },
+        {
+          id: 'ch11',
+          title: 'Palak Chicken',
+          price: 1250,
+          description: 'Chicken Breast Cubes in tomato, onions, spinach, and spices',
+          image: 'https://images.pexels.com/photos/10078268/pexels-photo-10078268.jpeg?auto=compress&cs=tinysrgb&w=1260&h=750&dpr=2',
+        },
+        // New Items
+        {
+          id: 'ch12',
+          title: 'Sweet and Sour Chicken',
+          price: 1150,
+          description: 'Chicken cooked in a tangy sweet and sour sauce.',
+          image: 'https://images.pexels.com/photos/5848527/pexels-photo-5848527.jpeg?auto=compress&cs=tinysrgb&w=1260&h=750&dpr=2',
+        },
+        {
+          id: 'ch13',
+          title: 'Honey Chili Chicken',
+          price: 1150,
+          description: 'Crispy chicken tossed in honey and chili sauce.',
+          image: 'https://images.pexels.com/photos/5339083/pexels-photo-5339083.jpeg?auto=compress&cs=tinysrgb&w=1260&h=750&dpr=2',
+        },
+        {
+          id: 'ch14',
+          title: 'Schezuan Chicken',
+          price: 1150,
+          description: 'Spicy chicken cooked in a flavorful Schezuan sauce.',
+          image: 'https://images.pexels.com/photos/6210876/pexels-photo-6210876.jpeg?auto=compress&cs=tinysrgb&w=1260&h=750&dpr=2',
+        },
+        {
+          id: 'ch15',
+          title: 'Dry Chili Chicken',
+          price: 1150,
+          description: 'Chicken stir-fried with dry chili and spices.',
+          image: 'https://images.pexels.com/photos/10309473/pexels-photo-10309473.jpeg?auto=compress&cs=tinysrgb&w=1260&h=750&dpr=2',
+        },
+        {
+          id: 'ch16',
+          title: 'Gong Bao Chicken',
+          price: 1150,
+          description: 'Chicken stir-fried with peanuts and chili in a savory sauce.',
+          image: 'https://images.pexels.com/photos/14855139/pexels-photo-14855139.jpeg?auto=compress&cs=tinysrgb&w=1260&h=750&dpr=2',
+        },
+        {
+          id: 'ch17',
+          title: 'Chicken with Garlic & Ginger',
+          price: 1150,
+          description: 'Chicken stir-fried with garlic and ginger for a fragrant flavor.',
+          image: 'https://images.pexels.com/photos/10277948/pexels-photo-10277948.jpeg?auto=compress&cs=tinysrgb&w=1260&h=750&dpr=2',
+        },
+        {
+          id: 'ch18',
+          title: 'Chicken with Cashew Nuts',
+          price: 1150,
+          description: 'Chicken stir-fried with cashew nuts and vegetables.',
+          image: 'https://images.pexels.com/photos/1603896/pexels-photo-1603896.jpeg?auto=compress&cs=tinysrgb&w=1260&h=750&dpr=2',
+        },
+        {
+          id: 'ch19',
+          title: 'Chicken in Black Bean Sauce',
+          price: 1150,
+          description: 'Chicken cooked in a savory black bean sauce.',
+          image: 'https://images.pexels.com/photos/27556985/pexels-photo-27556985/free-photo-of-traditional-caribbean-cuisine.jpeg?auto=compress&cs=tinysrgb&w=800',
+        },
+        {
+          id: 'ch20',
+          title: 'Chicken Sizzler',
+          price: 1250,
+          description: 'Sizzling chicken served with vegetables and spices.',
+          image: 'https://images.pexels.com/photos/2338407/pexels-photo-2338407.jpeg?auto=compress&cs=tinysrgb&w=1260&h=750&dpr=2',
+        },
+      ];
 
 
 
-const maintenanceServices = [
-  {
-    id: 'ms1',
-    title: 'Engine Oil Change',
-    description: 'Complete engine oil drain and refill with quality oil and filter.',
-    image: 'https://media.istockphoto.com/id/652660470/photo/auto-mechanic-service-and-repair.jpg?s=612x612&w=0&k=20&c=bEQwVRbOLw1i5w5q8Iz6llAKFEokFDZq5mLFq_khZ-o='
-  },
-  {
-    id: 'ms2',
-    title: 'Brake Inspection & Replacement',
-    description: 'Check and replace brake pads, discs, and brake fluid if necessary.',
-    image: 'https://media.istockphoto.com/id/2197500427/photo/close-up-of-car-disc-brake-in-workshop.jpg?s=612x612&w=0&k=20&c=n5aDbbqinJcLA-wW0Z3x7uikdndBZ5PdqlDq9KabzXM='
-  },
-  {
-    id: 'ms3',
-    title: 'Air Filter Replacement',
-    description: 'Replace engine air filter to maintain clean airflow and performance.',
-    image: 'https://media.istockphoto.com/id/2202614431/photo/comparison-between-new-air-filter-and-used-air-filter-on-car-engine-bay.jpg?s=612x612&w=0&k=20&c=Z1Ai-f88h3yGPCzMHLyDzkLU2zyft6ESt1a0os8Te7g='
-  },
-  {
-    id: 'ms4',
-    title: 'Battery Health Check',
-    description: 'Test battery performance and clean terminals; replace if needed.',
-    image: 'https://media.istockphoto.com/id/1251530338/photo/auto-mechanic-working-in-the-garage-service-and-maintenance-and-car-maintenance.jpg?s=612x612&w=0&k=20&c=yWF31I_0KILUboJoEDgImlyKOhqPcoMZAsnRNDV6Zfk='
-  },
-  {
-    id: 'ms5',
-    title: 'Coolant Flush & Replacement',
-    description: 'Flush out old coolant and refill with high-grade antifreeze.',
-    image: 'https://media.istockphoto.com/id/2128861985/photo/focused-on-the-automotive-industry-within-the-contemporary-new-automobile-engine-room-machine.jpg?s=612x612&w=0&k=20&c=JPzV3j-Y_UlBnMFADJtvEvcGHZYJlVkXs1C1g-GkxVg='
-  },
-  {
-    id: 'ms6',
-    title: 'Tire Rotation & Pressure Check',
-    description: 'Rotate tires and ensure correct pressure for even wear.',
-    image: 'https://media.istockphoto.com/id/1086003468/photo/the-refill-pressure-head-and-black-tyre-with-alloy-wheel-at-car-service-shop-center.jpg?s=612x612&w=0&k=20&c=ADGm5tEwEgdKIHgotXqWPLpIlseA8qPteQEkx_8kWjM='
-  },
-  {
-    id: 'ms7',
-    title: 'Spark Plug Replacement',
-    description: 'Change spark plugs to improve fuel efficiency and ignition.',
-    image: 'https://media.istockphoto.com/id/1258125364/photo/replacement-of-spark-plugs-in-a-modern-engine.jpg?s=612x612&w=0&k=20&c=3PxkCoppC8g7f1nWWn-GBiZjQocjz7sLuVj2Wpx8iJ8='
-  },
-  {
-    id: 'ms8',
-    title: 'Wiper Blade Replacement',
-    description: 'Install new wiper blades for clearer visibility during rain.',
-    image: 'https://media.istockphoto.com/id/2149245967/photo/close-up-of-a-black-car-wiper-car-detail.jpg?s=612x612&w=0&k=20&c=9j2o2AbV2OiMoNcHRtElQso8c1jBj_WZrOWjVL1Vab0='
-  },
-  {
-    id: 'ms9',
-    title: 'Transmission Fluid Change',
-    description: 'Replace old transmission fluid to ensure smooth gear shifts.',
-    image: 'https://media.istockphoto.com/id/2164910526/photo/automatic-change-of-brake-fluid-in-a-car-service.jpg?s=612x612&w=0&k=20&c=DP9ZJvqYojjKPzeMjwddP4wCqaOTEbrOEWYYXQI7lxQ='
-  },
-  {
-    id: 'ms10',
-    title: 'Full Service Inspection',
-    description: 'Complete multi-point inspection with full-service tune-up.',
-    image: 'https://media.istockphoto.com/id/2203463408/photo/cropped-shot-of-mechanic-man-measuring-voltage-on-car-battery-in-auto-service.jpg?s=612x612&w=0&k=20&c=eltxl919IE798MF9gfiII1qQlu9tNzA0BswRKYlPJXo='
-  },
-  {
-    id: 'ms11',
-    title: 'Timing Belt Inspection',
-    description: 'Check and replace timing belt if worn to prevent engine failure.',
-    image: 'https://media.istockphoto.com/id/1962526551/photo/twin-cam-engine-car-with-pulley-wheels-and-cam-belt.jpg?s=612x612&w=0&k=20&c=XD5Pi_BhVdQ18-CBz-gCdqrP6AIliq2ieQdPaQiyy3Y='
-  },
-  {
-    id: 'ms12',
-    title: 'Wheel Alignment',
-    description: 'Adjust the angles of wheels to the manufacturer’s specifications for optimal handling.',
-    image: 'https://media.istockphoto.com/id/463462731/photo/computerized-wheel-alignment-machine-clamp.jpg?s=612x612&w=0&k=20&c=1TSPgkpZYY8ha69Fbp0Ny9oaAPtgGexcwmBbVXVB0_w='
-  },
-  {
-    id: 'ms13',
-    title: 'Exhaust System Check',
-    description: 'Inspect exhaust components for blockages, rust, or leaks and replace if required.',
-    image: 'https://media.istockphoto.com/id/2197738784/photo/car-exhaust-pipe-in-garage.jpg?s=612x612&w=0&k=20&c=i-hjL6-Mq23w5-Ky9PR6gcRMATBWXJTbMR_gsVbVNH8='
-  },
-  {
-    id: 'ms14',
-    title: 'Cabin Filter Replacement',
-    description: 'Install a new cabin air filter for improved air quality inside your car.',
-    image: 'https://media.istockphoto.com/id/2201114254/photo/a-mechanic-changes-the-cabin-air-filter-of-a-car-dirty-car-cabin-air-filter-timely-car-service.jpg?s=612x612&w=0&k=20&c=_djoF5aU_5g7ZWjGqsa7AaGiCA8M341HTMH_hWw28M4='
-  }
-];  
+        const fish = [
+          {
+            id: 'f1',
+            title: 'Fish and Chips',
+            price: 1300,
+            description: 'Traditional British Fish & Chips',
+            image: 'https://images.unsplash.com/photo-1579208575657-c595a05383b7?ixlib=rb-1.2.1&auto=format&fit=crop&w=1350&q=80',
+          },
+          {
+            id: 'f2',
+            title: 'Grilled Prawns',
+            price: 1700,
+            description: 'Plain, Pili Pili or Garlic',
+            image: 'https://images.unsplash.com/photo-1565680018434-b513d5e5fd47?ixlib=rb-1.2.1&auto=format&fit=crop&w=1350&q=80',
+          },
+          {
+            id: 'f3',
+            title: 'Calamari',
+            price: 950,
+            description: 'Grilled or deep fried',
+            image: 'https://images.unsplash.com/photo-1604909052743-94e838986d24?ixlib=rb-1.2.1&auto=format&fit=crop&w=1350&q=80',
+          },
+          {
+            id: 'f4',
+            title: 'Grilled Tilapia Fillet',
+            price: 1350,
+            description: 'Lemon or spicy',
+            image: 'https://images.unsplash.com/photo-1519708227418-c8fd9a32b7a2?ixlib=rb-1.2.1&auto=format&fit=crop&w=1350&q=80',
+          },
+          {
+            id: 'f5',
+            title: 'Fish Fingers',
+            price: 800,
+            description: 'Served with your Choice of parsley potatoes, rice, fries or salad',
+            image: 'https://images.unsplash.com/photo-1600271801401-65fe5f623a9a?ixlib=rb-1.2.1&auto=format&fit=crop&w=1350&q=80',
+          },
+            {
+              id: 'f6',
+              title: 'Fish Masala',
+              price: 1300,
+              description: 'Tilapia fillet cooked in special masala gravy',
+              image: 'https://images.pexels.com/photos/29161607/pexels-photo-29161607/free-photo-of-sushi-boat-platter-with-varied-rolls-and-sashimi.jpeg?auto=compress&cs=tinysrgb&w=1260&h=750&dpr=2',
+            },
+            {
+              id: 'f7',
+              title: 'Dry Chili Garlic Fish',
+              price: 1300,
+              description: 'Tilapia fillet cooked with spices, garlic, chili, tomato, and onion',
+              image: 'https://images.pexels.com/photos/8995209/pexels-photo-8995209.jpeg?auto=compress&cs=tinysrgb&w=800',
+            },
+            {
+              id: 'f8',
+              title: 'Dry Chili Garlic Prawns',
+              price: 1650,
+              description: 'Prawns cooked with spices, garlic, chili, tomato, and onion',
+              image: 'https://images.pexels.com/photos/725997/pexels-photo-725997.jpeg?auto=compress&cs=tinysrgb&w=800',
+            },
+            {
+              id: 'f9',
+              title: 'Coconut Cream Prawns',
+              price: 1650,
+              description: 'Prawns cooked in creamy coconut enriched gravy',
+              image: 'https://images.pexels.com/photos/5272102/pexels-photo-5272102.jpeg?auto=compress&cs=tinysrgb&w=1260&h=750&dpr=2',
+            },
+        ]; 
 
-const tireServices = [
-  {
-    id: 'ts1',
-    title: 'Tire Fitting',
-    description: 'Professional installation of new tires on all vehicle types.',
-    image: 'https://media.istockphoto.com/id/701032426/photo/car-mechanic-hands-replace-brakes-in-garage.jpg?s=612x612&w=0&k=20&c=reD240itLvL0Y3N5NNKm7s9k3G6EkdioEdWYXfEzJAw='
-  },
-  {
-    id: 'ts2',
-    title: 'Tire Balancing',
-    description: 'Ensure smooth driving by balancing tire weight evenly.',
-    image: 'https://media.istockphoto.com/id/1192910232/photo/mechanic-man-working-on-balancing-machine.jpg?s=612x612&w=0&k=20&c=EE4o-gzygJnhph4-w5J2Mjfi-5B1sh9iBCgE20qLbHI='
-  },
-  {
-    id: 'ts3',
-    title: 'Puncture Repairs',
-    description: 'Quick and reliable puncture repairs for all tires.',
-    image: 'https://media.istockphoto.com/id/2170826024/photo/flat-tire-car-damage-insurance.jpg?s=612x612&w=0&k=20&c=TAOJxN1JGybeTqfHRvUNzWvTznPfmjDiVqQ50TnOjbQ='
-  },
-  {
-    id: 'ts4',
-    title: 'Wheel Alignment',
-    description: 'Precise wheel alignment to improve vehicle handling.',
-    image: 'https://media.istockphoto.com/id/2106472694/photo/brake-pad-and-tire-change-at-auto-repair-shop.jpg?s=612x612&w=0&k=20&c=G4-me_2NPW0Rpl7pS-HKlGv3YiRHhqd0EWwd3sXSMl4='
-  },
-  {
-    id: 'ts5',
-    title: 'Wheel Rotation',
-    description: 'Rotate tires to promote even tread wear.',
-    image: 'https://media.istockphoto.com/id/1077225004/photo/seasonal-wheels-replacement.jpg?s=612x612&w=0&k=20&c=19cv4cEJeOA89vyzR4ohG92n-3pyCXaHwklJiWIw58I='
-  },
-  {
-    id: 'ts6',
-    title: 'Nitrogen Inflation',
-    description: 'Inflate tires with nitrogen for better performance and pressure retention.',
-    image: 'https://media.istockphoto.com/id/1974865020/photo/a-pressure-gauge-that-determines-tire-pressure-tire-inflation-process.jpg?s=612x612&w=0&k=20&c=pogcQrSoqh5RMcXIoE1y0vYLzAAWw4HWgXzO83gwNYU='
-  },
-  {
-    id: 'ts7',
-    title: 'Tire Inspection',
-    description: 'Comprehensive tire inspection for safety and wear issues.',
-    image: 'https://i.postimg.cc/0yHvkhh5/tire.jpg'
-  },
-  {
-    id: 'ts8',
-    title: 'Tire Pressure Check',
-    description: 'Ensure correct tire pressure for optimal performance and safety.',
-    image: 'https://i.postimg.cc/zXX4y0Cy/pp.jpg'
-  },
-  {
-    id: 'ts9',
-    title: 'Rim Repairs',
-    description: 'Fix damaged or bent rims to restore wheel balance.',
-    image: 'https://media.istockphoto.com/id/2203289482/photo/multi-colored-paints-on-a-car-car-sheet-metal-elements-covered-with-rust-cheap-car-repair.jpg?s=612x612&w=0&k=20&c=qKM5Gd3fXR1WdCd67HseizNyyLwOgg718pKZCijOZqI='
-  },
-  {
-    id: 'ts10',
-    title: 'Winter Tire Installation',
-    description: 'Install winter tires for better traction in snowy conditions.',
-    image: 'https://media.istockphoto.com/id/1177501406/photo/new-tyre-for-car-or-lorry-held-by-worker-of-contemporary-machine-repair-service.jpg?s=612x612&w=0&k=20&c=ixzo9izDDsbCjJwggpcMna2mpV4EQ8Cn3apKn0JsSWw='
-  },
-  {
-    id: 'ts11',
-    title: 'Performance Tire Upgrade',
-    description: 'Upgrade to high-performance tires for enhanced driving.',
-    image: 'https://media.istockphoto.com/id/174572916/photo/dyno-testing.jpg?s=612x612&w=0&k=20&c=cUBfetodAXww4eHlmlMDlubHHBpVsHvvvfpZlCiRa8Y='
-  },
-  {
-    id: 'ts12',
-    title: 'Tire Storage',
-    description: 'Secure storage of off-season tires.',
-    image: 'https://media.istockphoto.com/id/1328185586/photo/group-of-new-tires-for-sale-at-a-tire-store.jpg?s=612x612&w=0&k=20&c=4uwl-BM8TN5sR_y8QBlliaWrT6iH95vuBli_lFxMirk='
-  },
-  {
-    id: 'ts13',
-    title: 'Tire Bead Sealing',
-    description: 'Seal the tire bead to stop slow leaks around the rim.',
-    image: 'https://media.istockphoto.com/id/1201294077/photo/car-tire-repair.jpg?s=612x612&w=0&k=20&c=fQvw7g4_BqV9SMD3Nmib6BM4Sbhhoqh6_vSLxeTbYCY='
-  },
-  {
-    id: 'ts14',
-    title: 'Run-Flat Tire Service',
-    description: 'Special care and replacement of run-flat tire systems.',
-    image: 'https://media.istockphoto.com/id/1367623001/photo/closeup-of-a-deflated-or-flat-tire-that-has-been-neglected-for-days-of-an-automobile-parked.jpg?s=612x612&w=0&k=20&c=W5d0MINawYUExRM3crK0cAXyOzh01Mg4Vai_NBjWvsU='
-  },
-  {
-    id: 'ts15',
-    title: 'Valve Stem Replacement',
-    description: 'Replace old or leaking valve stems during tire service.',
-    image: 'https://media.istockphoto.com/id/2078102146/photo/detail-of-the-valve-with-black-cover-on-silver-wheel-of-the-car.jpg?s=612x612&w=0&k=20&c=D7qVmzU6uabZTVT5jHwDo1M3aFBR-bkK6AiF-AOwMcg='
-  },
-  {
-    id: 'ts16',
-    title: 'Flat Tire Rescue',
-    description: 'On-site flat tire rescue and temporary fixes.',
-    image: 'https://media.istockphoto.com/id/1324661234/photo/belt-hook-on-the-tire-of-the-towed-car.jpg?s=612x612&w=0&k=20&c=BShaE59Gk2dugGAoKeqNBP4fDvzBJQ6NbDHIQxk5_7k='
-  }
-];
+        const salads = [
+          {
+            id: 'sld1',
+            title: 'Greek Salad',
+            price: 800,
+            description: 'With Feta Cheese',
+            image: 'https://images.unsplash.com/photo-1540189549336-e6e99c3679fe?ixlib=rb-1.2.1&auto=format&fit=crop&w=1350&q=80',
+          },
+          {
+            id: 'sld2',
+            title: 'Chicken Salad',
+            price: 800,
+            description: 'Fresh salad with grilled chicken',
+            image: 'https://images.unsplash.com/photo-1505253716362-afaea1d3d1af?ixlib=rb-1.2.1&auto=format&fit=crop&w=1350&q=80',
+          },
+        ];
 
 
-const vehicleDetailingAndTuningServices = [
-  {
-    id: 'vd1',
-    title: 'Full Body Wash',
-    description: 'Thorough cleaning of the vehicle’s exterior body and wheels.',
-    image: 'https://i.postimg.cc/J0xcMNWL/IMG-20250227-WA0039.jpg'
-  },
-  {
-    id: 'vd2',
-    title: 'Engine Detailing',
-    description: 'Deep cleaning and dressing of engine bay with safe products.',
-    image: 'https://i.postimg.cc/tJfdCqdt/engine.jpg'
-  },
-  {
-    id: 'vd3',
-    title: 'Interior Deep Clean',
-    description: 'Vacuuming, dusting, and shampooing of seats and carpets.',
-    image: 'https://i.postimg.cc/9f8YNY4n/int.jpg'
-  },
-  {
-    id: 'vd4',
-    title: 'Leather Seat Conditioning',
-    description: 'Clean and condition leather or synthetic seats for durability and shine.',
-    image: 'https://i.postimg.cc/28JgnVBf/jiji.jpg'
-  },
-  {
-    id: 'vd5',
-    title: 'Turbo Installation',
-    description: 'Boost performance by installing a custom turbocharger kit.',
-    image: 'https://media.istockphoto.com/id/1473402444/photo/turbo-charger-on-race-car-engine.jpg?s=612x612&w=0&k=20&c=15IaSTU9hquzK8BTp4i3BcZloAYMASKxbSmQ95Y1NBo='
-  },
-  {
-    id: 'vd6',
-    title: 'ECU Remapping',
-    description: 'Tuning your ECU for optimal performance, fuel efficiency, or torque.',
-    image: 'https://media.istockphoto.com/id/1158234390/photo/two-young-car-mechanics-colleagues-servicing-the-car.jpg?s=612x612&w=0&k=20&c=UWzUmHiPq6xqn4iwU22O5lCuWTHWW1Hv9gbdLlQwERg='
-  },
-  {
-    id: 'vd7',
-    title: 'Seat Upgrade & Custom Covers',
-    description: 'Upgrade your vehicle’s comfort with seat padding and stylish covers.',
-    image: 'https://media.istockphoto.com/id/1039113102/photo/covers-for-car-seats-in-store.jpg?s=612x612&w=0&k=20&c=cDuriaZRqxG6TwLczCCxAffcFEeMb0dIrTXJCF7mgMo='
-  },
-  {
-    id: 'vd8',
-    title: 'Dashboard Polishing',
-    description: 'Clean and polish dashboard and trims to restore shine.',
-    image: 'https://media.istockphoto.com/id/1990168945/photo/modern-car-interior-dashboard.jpg?s=612x612&w=0&k=20&c=EcfzFJj4uTQHfsY4qAlfsNbxjSrfamFPHH1HL02h2X0='
-  },
-  {
-    id: 'vd9',
-    title: 'Tire Dressing',
-    description: 'Restore deep black look and protect tires from cracking.',
-    image: 'https://media.istockphoto.com/id/1054839056/photo/car-mechanic-changes-tires-in-the-repair-shop.jpg?s=612x612&w=0&k=20&c=KlJVrYnbGrlz2KZqPjV8g7Borot_7e6s-ZFXRaSavus='
-  },
-  {
-    id: 'vd10',
-    title: 'Glass & Mirror Coating',
-    description: 'Hydrophobic coating on all glass for rain repellency and visibility.',
-    image: 'https://media.istockphoto.com/id/1439468451/photo/rear-view-mirror-or-door-mirror-of-gray-car.jpg?s=612x612&w=0&k=20&c=7bdtY5diG2sjOgZpysBjiTeoAavXzVpxSxt9Jqw_mk8='
-  },
-  {
-    id: 'vd11',
-    title: 'Performance Air Intake Upgrade',
-    description: 'Install a high-flow cold air intake for better throttle response.',
-    image: 'https://media.istockphoto.com/id/1193036945/photo/air-filter-with-turbocharger-in-racing-car-engine.jpg?s=612x612&w=0&k=20&c=s6n5iYiN64MzoboqRAVpBJw5MxrkO7CZTD8aL1CvdRY='
-  },
-  {
-    id: 'vd12',
-    title: 'Exhaust System Enhancement',
-    description: 'Sporty sound and improved airflow with custom exhaust.',
-    image: 'https://media.istockphoto.com/id/1185435839/photo/image-of-car-in-process-of-replacement-new-tire-in-repair-shop.jpg?s=612x612&w=0&k=20&c=USEQSMfd7TpudHhmrZJyOK0h0RSmKDHAVvlBetDa-kM='
-  },
-  {
-    id: 'vd13',
-    title: 'Interior LED Ambient Lighting',
-    description: 'Install multicolor interior LED strips for a premium cabin vibe.',
-    image: 'https://media.istockphoto.com/id/627583910/photo/winter-driving.jpg?s=612x612&w=0&k=20&c=BccA_9QNMMBox3Ki9h7ip0hQgPBM2O_KuCfkPlqFfw4='
-  },
-  {
-    id: 'vd14',
-    title: 'Paint Correction & Buffing',
-    description: 'Removes swirl marks and brings back showroom shine.',
-    image: 'https://i.postimg.cc/HxpNTMFb/ssd.jpg'
-  },
-  {
-    id: 'vd15',
-    title: 'Wheel Alignment & Balancing',
-    description: 'Ensure proper handling and tire life with precision alignment.',
-    image: 'https://media.istockphoto.com/id/1227609881/photo/wheel-alignment-equipment-on-a-car-wheel-in-a-repair-station.jpg?s=612x612&w=0&k=20&c=Vyi7sbyW2D4XtMkGjbssZBKYF645KiKPXbo_GUxXOAc='
-  },
-  {
-    id: 'vd16',
-    title: 'Complete Comfort & Performance Package',
-    description: 'Includes detailing, seat conditioning, ambient lighting & ECU tune.',
-    image: 'https://i.postimg.cc/cCtBW41Q/lux.jpg'
-  }
-];
+        const lambAndPork = [
+          {
+            id: 'lp1',
+            title: 'Lamb Chops',
+            price: 1150,
+            description: 'Served with your Choice of roast or mashed potatoes, vegetables & gravy',
+            image: 'https://images.unsplash.com/photo-1603360946369-dc9bb6258143?ixlib=rb-1.2.1&auto=format&fit=crop&w=1350&q=80',
+          },
+          {
+            id: 'lp2',
+            title: 'Pork Chops',
+            price: 1250,
+            description: 'Served with your Choice of mashed or roast potatoes, veg & gravy',
+            image: 'https://images.unsplash.com/photo-1432139555190-58524dae6a55?ixlib=rb-1.2.1&auto=format&fit=crop&w=1350&q=80',
+          },
+        ];
 
 
-const brakeAndSuspensionServices = [
-  {
-    id: 'bs1',
-    title: 'Brake Pad Replacement',
-    description: 'Replace worn brake pads with high-performance options.',
-    image: 'https://media.istockphoto.com/id/1820437580/photo/used-car-brake-pads-in-the-hands-of-a-mechanic-with-brake-discs-and-brake-calipers-on-the.jpg?s=612x612&w=0&k=20&c=joXC4aiyu-dBYLaZNOLZqDtBdmKT_obrG_94ozvpB2o='
-  },
-  {
-    id: 'bs2',
-    title: 'Brake Fluid Flush',
-    description: 'Remove old fluid and replace with manufacturer-approved brake fluid.',
-    image: 'https://media.istockphoto.com/id/2150924580/photo/dusty-red-car-in-garage-for-repair.jpg?s=612x612&w=0&k=20&c=mX7B20WZIPTvEeW42SiYOHcYckeeiojMQ04rbF1d2gI='
-  },
-  {
-    id: 'bs3',
-    title: 'Brake Disc/Rotor Resurfacing',
-    description: 'Smooth and resurface brake rotors to restore stopping power.',
-    image: 'https://media.istockphoto.com/id/626146076/photo/disk-brake-machine-working-to-rebuild-serface.jpg?s=612x612&w=0&k=20&c=MyczrDlqwMyd020EOCoR6BcxRiuhx-KR6c7dDpZQpqk='
-  },
-  {
-    id: 'bs4',
-    title: 'Brake Caliper Servicing',
-    description: 'Repair, lubricate or replace sticking brake calipers.',
-    image: 'https://media.istockphoto.com/id/2165488002/photo/automotive-maintenanceclose-up-of-the-brake-mechanism-of-a-car.jpg?s=612x612&w=0&k=20&c=cCekn6kw5lHQOVtSabnrJYdU7wT7tOI4NffLJpYGpFo='
-  },
-  {
-    id: 'bs5',
-    title: 'Suspension System Inspection',
-    description: 'Check for worn-out shocks, struts, bushings, and mounts.',
-    image: 'https://media.istockphoto.com/id/2007558151/photo/closeup-cars-suspension-system-focusing-on-the-axle-and-cv-joint-area.jpg?s=612x612&w=0&k=20&c=xE37r3h2Gd8Ddp4DoxMqotNeWup3jNL36w-omBsFSr8='
-  },
-  {
-    id: 'bs6',
-    title: 'Shock Absorber Replacement',
-    description: 'Restore ride comfort with new shocks or struts.',
-    image: 'https://media.istockphoto.com/id/946261062/photo/bottom-view-of-wheel-and-shock-absorber-of-vehicle.jpg?s=612x612&w=0&k=20&c=w-1POmKRJGzBLYRRDmyUPUcW0-2fGRuIDuLmyHsEP8U='
-  },
-  {
-    id: 'bs7',
-    title: 'Steering Rack Repair',
-    description: 'Fix issues in the power steering rack for smooth turning.',
-    image: 'https://media.istockphoto.com/id/1198916270/photo/car-bottom-view-wishbone-power-steering-rack-arm-suspension-and-etc-system-of-saloon-or-sedan.jpg?s=612x612&w=0&k=20&c=PHGosX6U0K65CiGa8kHeU2Llfyi5X94fXC1BNrEDG2A='
-  },
-  {
-    id: 'bs8',
-    title: 'Brake Line Replacement',
-    description: 'Replace rusty or damaged brake lines to prevent leaks.',
-    image: 'https://media.istockphoto.com/id/2181635433/photo/drum-brake-shoes.jpg?s=612x612&w=0&k=20&c=5wgBoOeIrnvuLPJ3Nh41jKn0wMkFpgN2LyOm-e76EkI='
-  },
-  {
-    id: 'bs9',
-    title: 'Control Arm Replacement',
-    description: 'Restore suspension geometry with new control arms and ball joints.',
-    image: 'https://media.istockphoto.com/id/1390082936/photo/broken-car-ball-joint-on-pickup-track.jpg?s=612x612&w=0&k=20&c=SK9E-c_DrUGjRc08WKHAT79cMxehNQaX5cr8O27vpdU='
-  },
-  {
-    id: 'bs10',
-    title: 'Brake Light Inspection & Replacement',
-    description: 'Ensure all brake lights function correctly for safety.',
-    image: 'https://images.pexels.com/photos/8986034/pexels-photo-8986034.jpeg?auto=compress&cs=tinysrgb&w=1260&h=750&dpr=1'
-  },
-  {
-    id: 'bs11',
-    title: 'Suspension Bushing Replacement',
-    description: 'Replace worn-out rubber bushings to reduce vibration and noise.',
-    image: 'https://media.istockphoto.com/id/1409490917/photo/mechanic-repairs-the-running-gear-of-a-car-car-hands-of-a-mechanic-close-up-small-business.jpg?s=612x612&w=0&k=20&c=bp_uIoa6aP9DNHbZezeOOT-yLdKhQEixLSEa6oOXNU0='
-  },
-  {
-    id: 'bs12',
-    title: 'Wheel Alignment',
-    description: 'Ensure proper tracking and handling with a full alignment.',
-    image: 'https://media.istockphoto.com/id/2106472694/photo/brake-pad-and-tire-change-at-auto-repair-shop.jpg?s=612x612&w=0&k=20&c=G4-me_2NPW0Rpl7pS-HKlGv3YiRHhqd0EWwd3sXSMl4='
-  },
-  {
-    id: 'bs13',
-    title: 'Suspension Lift or Lowering Kits',
-    description: 'Customize ride height with lift or lowering kit installations.',
-    image: 'https://media.istockphoto.com/id/2007558151/photo/closeup-cars-suspension-system-focusing-on-the-axle-and-cv-joint-area.jpg?s=612x612&w=0&k=20&c=xE37r3h2Gd8Ddp4DoxMqotNeWup3jNL36w-omBsFSr8='
-  },
-  {
-    id: 'bs14',
-    title: 'ABS Diagnostics & Repair',
-    description: 'Scan and fix issues in the Anti-lock Braking System (ABS).',
-    image: 'https://media.istockphoto.com/id/2073383462/photo/car-dashboard-lights-engine-light.jpg?s=612x612&w=0&k=20&c=II4sn1cTDVhYQlS0zW6ZBNNxSM8oehhy0wfR-cJQNN4='
-  }
-];
+        const vegetarianDishes = [
+          {
+            id: 'vd1',
+            title: 'Paneer Tikka',
+            price: 1150,
+            description: 'Tandoored Cottage Cheese Cubes marinated in spices',
+            image: 'https://images.pexels.com/photos/2741461/pexels-photo-2741461.jpeg',
+          },
+          {
+            id: 'vd2',
+            title: 'Makhani Paneer',
+            price: 1150,
+            description: 'Paneer in a spicy, rich tomato, butter and cream gravy',
+            image: 'https://images.pexels.com/photos/28674541/pexels-photo-28674541/free-photo-of-delicious-paneer-tikka-in-rich-tomato-gravy.jpeg?auto=compress&cs=tinysrgb&w=1260&h=750&dpr=2',
+          },
+          {
+            id: 'vd3',
+            title: 'Palak Paneer',
+            price: 1150,
+            description: 'Cubes of cottage cheese with ground spinach and spices',
+            image: 'https://images.pexels.com/photos/4958731/pexels-photo-4958731.jpeg?auto=compress&cs=tinysrgb&w=1260&h=750&dpr=2',
+          },
+          {
+            id: 'vd4',
+            title: 'Dry Chili Garlic Paneer',
+            price: 1150,
+            description: 'Paneer cooked in spices, garlic, chili, tomato, and onion',
+            image: 'https://images.pexels.com/photos/10522937/pexels-photo-10522937.jpeg?auto=compress&cs=tinysrgb&w=1260&h=750&dpr=2',
+          },
+          {
+            id: 'vd5',
+            title: 'Dahl Makhani',
+            price: 800,
+            description: 'Black lentils cooked in a spicy creamy sauce',
+            image: 'https://images.pexels.com/photos/5410403/pexels-photo-5410403.jpeg?auto=compress&cs=tinysrgb&w=1260&h=750&dpr=2',
+          },
+        ];
 
 
-const batteryServices = [
-  {
-    id: 'bt1',
-    title: 'Battery Health Check',
-    description: 'Comprehensive battery diagnostics to ensure optimal performance.',
-    image: 'https://media.istockphoto.com/id/2148440620/photo/automotive-battery-tester-diagnosis-defective-battery.jpg?s=612x612&w=0&k=20&c=CfZ_ZcUxqZ_uLL0IiHQW8efupWD9wEGGisqAQZf9TQQ='
-  },
-  {
-    id: 'bt2',
-    title: 'Battery Terminal Cleaning',
-    description: 'Clean corroded terminals to improve battery connectivity.',
-    image: 'https://media.istockphoto.com/id/510384660/photo/washed-battery-with-foam-when-cleaning-the-car.jpg?s=612x612&w=0&k=20&c=afEPuA25jiMJpaNUrvS_xWqSXXrmX9-RE3MetGSu7MY='
-  },
-  {
-    id: 'bt3',
-    title: 'Jump Start Service',
-    description: 'On-the-spot jump-start for dead batteries.',
-    image: 'https://media.istockphoto.com/id/2003519130/photo/it-seems-like-this-old-car-wont-start.jpg?s=612x612&w=0&k=20&c=8D4CKbL7XDmdowhF7fsUgNMj3-RdiaYcM6nx6F7bc-g='
-  },
-  {
-    id: 'bt4',
-    title: 'Battery Replacement (Standard)',
-    description: 'Install a new standard battery with safe disposal of old one.',
-    image: 'https://media.istockphoto.com/id/2181048283/photo/a-mechanic-replaces-a-car-battery-in-a-vehicles-engine-bay-during-routine-maintenance-at-a.jpg?s=612x612&w=0&k=20&c=Y53v-TK_4oXGlm43WuOEHgLMQGqdPW7-22qcLTwLahU='
-  },
-  {
-    id: 'bt5',
-    title: 'Battery Replacement (High-Performance)',
-    description: 'Install high-capacity battery for performance vehicles.',
-    image: 'https://media.istockphoto.com/id/2181048197/photo/a-mechanic-is-working-on-the-battery-of-a-car-in-a-garage.jpg?s=612x612&w=0&k=20&c=mhpLvArUrOv9S67TrLXyjlObk8ekckGWVhiKoW3Nyuk='
-  },
-  {
-    id: 'bt6',
-    title: 'Hybrid Vehicle Battery Check',
-    description: 'Diagnostics and maintenance of hybrid car batteries.',
-    image: 'https://media.istockphoto.com/id/2185359123/photo/inspection-hand-holding-battery-capacity-tester-ev-battery-voltmeter-car-inspector-service.jpg?s=612x612&w=0&k=20&c=UPoWfj42J36mQr5zUJOgxypr8_7AQu4CLVgJ4SOwdh0='
-  },
-  {
-    id: 'bt7',
-    title: 'Battery Load Testing',
-    description: 'Test battery under load to detect weak or failing units.',
-    image: 'https://media.istockphoto.com/id/2168393131/photo/technician-diagnosing-health-of-automobile-alternator-with-instrument-test-result-suggested.jpg?s=612x612&w=0&k=20&c=ArSJmJt3ePKH6zvLDv2mlpAeNlu6PfssebRxAqjDZqw='
-  },
-  {
-    id: 'bt8',
-    title: 'Battery Charging Service',
-    description: 'Slow or fast charging options for low-voltage batteries.',
-    image: 'https://media.istockphoto.com/id/2148502928/photo/car-battery-is-charged-by-the-device.jpg?s=612x612&w=0&k=20&c=fLV4ebPqtYXSKchEzFKwR2kzN5PC6XnTaJhp_Aw-UeM='
-  },
-  {
-    id: 'bt9',
-    title: 'Remote Battery Monitoring Installation',
-    description: 'Install sensors for real-time battery health alerts.',
-    image: 'https://media.istockphoto.com/id/2175572315/photo/battery-capacity-tester-ev-battery-voltmeter-car-inspector-service-power-industrial-fuel.jpg?s=612x612&w=0&k=20&c=UG7vHhr1JAtqO0IqqXMvXW0gcjshIu4PlWxDUXhSLf0='
-  },
-  {
-    id: 'bt10',
-    title: 'Alternator Check',
-    description: 'Ensure your alternator is charging the battery correctly.',
-    image: 'https://media.istockphoto.com/id/1339901432/photo/car-starter-battery-voltage-measured-with-multimeter-voltage-is-around-13-volts-as-the.jpg?s=612x612&w=0&k=20&c=DiHXHmRa9Jqh_CyiBK4MExgVk7lBjafVZgBEOPxQh24='
-  },
-  {
-    id: 'bt11',
-    title: 'Parasitic Drain Test',
-    description: 'Find hidden power drains that kill your battery overnight.',
-    image: 'https://media.istockphoto.com/id/1384858577/photo/master-repairs-wires-in-modern-car-alarm-security-system.jpg?s=612x612&w=0&k=20&c=g2PvoVRrrkJNfRpvmxdMBtGrzWjladR99J80sFbikHM='
-  },
-  {
-    id: 'bt12',
-    title: 'Battery Mount Replacement',
-    description: 'Replace loose or broken battery brackets/mounts.',
-    image: 'https://media.istockphoto.com/id/1671428879/photo/the-battery-installed-in-the-car-engine.jpg?s=612x612&w=0&k=20&c=AWCWxKqr6JRhVBi1oAywOHp-WckBI80iKBwUReI1RSg='
-  },
-  {
-    id: 'bt13',
-    title: 'Battery Cable Replacement',
-    description: 'Install new battery cables for better power transfer.',
-    image: 'https://media.istockphoto.com/id/1471623754/photo/photo-of-car-battery-positive-wire.jpg?s=612x612&w=0&k=20&c=h35qjhKQAoWTLWyPElIgrrcp336d7mlO_SVzI6_SWDM='
-  },
-  {
-    id: 'bt14',
-    title: 'Emergency Roadside Battery Swap',
-    description: 'Mobile service for urgent battery replacements on the road.',
-    image: 'https://media.istockphoto.com/id/1421037391/photo/roadside-assistance.jpg?s=612x612&w=0&k=20&c=yl_dHjZgfkhI_IHGT6M3-HS5daoTh0WJm-wafaWfVng='
-  },
-  {
-    id: 'bt15',
-    title: 'Recycled Battery Installation',
-    description: 'Eco-friendly refurbished battery replacements at lower cost.',
-    image: 'https://media.istockphoto.com/id/960780272/photo/a-car-battery.jpg?s=612x612&w=0&k=20&c=MJ6t4pYEU-n8bA95nQ234gF7O-ggQRgEMLqA-VzYaSg='
-  },
-  {
-    id: 'bt16',
-    title: 'Battery Disposal & Recycling',
-    description: 'Safe and responsible disposal of used car batteries.',
-    image: 'https://media.istockphoto.com/id/1292288024/photo/a-pallet-with-used-car-batteries-awaiting-recycling.jpg?s=612x612&w=0&k=20&c=WX6rSFPWWGAp0p6Jg2eJrjN-okbZ_9gUn2RwNCKXHrQ='
-  }
-];
+        const cocktails = [
+          {
+            id: 'ct1',
+            title: 'Margarita',
+            price: 850,
+            description: 'Classic tequila cocktail with lime and a salted rim',
+            image: 'https://images.pexels.com/photos/5433721/pexels-photo-5433721.jpeg?auto=compress&cs=tinysrgb&w=800',
+          },
+          {
+            id: 'ct2',
+            title: 'Mojito',
+            price: 750,
+            description: 'Refreshing blend of rum, mint, lime, and soda',
+            image: 'https://images.pexels.com/photos/12591350/pexels-photo-12591350.jpeg?auto=compress&cs=tinysrgb&w=1260&h=750&dpr=2',
+          },
+          {
+            id: 'ct3',
+            title: 'Pina Colada',
+            price: 900,
+            description: 'Tropical cocktail with pineapple, coconut cream, and rum',
+            image: 'https://images.pexels.com/photos/24870656/pexels-photo-24870656/free-photo-of-a-drink-with-a-pineapple-garnish-and-a-white-rim.jpeg?auto=compress&cs=tinysrgb&w=800',
+          },
+          {
+            id: 'ct4',
+            title: 'Old Fashioned',
+            price: 950,
+            description: 'Whiskey cocktail with bitters, sugar, and an orange twist',
+            image: 'https://images.pexels.com/photos/8346711/pexels-photo-8346711.jpeg?auto=compress&cs=tinysrgb&w=1260&h=750&dpr=2',
+          },
+          {
+            id: 'ct5',
+            title: 'Cosmopolitan',
+            price: 800,
+            description: 'Vodka, cranberry juice, triple sec, and lime for a zesty flavor',
+            image: 'https://images.pexels.com/photos/1304542/pexels-photo-1304542.jpeg?auto=compress&cs=tinysrgb&w=1260&h=750&dpr=2',
+          },
+        ];
+
+        const indianWraps = [
+          {
+            id: 'iw1',
+            title: 'Murg Malai / Chicken Tikka / Masala',
+            price: 1050,
+            description: '',
+            image: 'https://images.pexels.com/photos/1117862/pexels-photo-1117862.jpeg?auto=compress&cs=tinysrgb&w=800',
+          },
+          {
+            id: 'iw2',
+            title: 'Paneer Tikka Wrap',
+            price: 950,
+            description: '',
+            image: 'https://images.pexels.com/photos/29125420/pexels-photo-29125420/free-photo-of-mexican-wraps-and-fries-with-dipping-sauces.jpeg?auto=compress&cs=tinysrgb&w=800',
+          },
+        ];
+
+        const bbq = [
+          {
+            id: 'bbq1',
+            title: 'Chicken Tikka Boneless',
+            price: 1200,
+            description: '',
+            image: 'https://images.pexels.com/photos/106343/pexels-photo-106343.jpeg?auto=compress&cs=tinysrgb&w=1260&h=750&dpr=2',
+          },
+          {
+            id: 'bbq2',
+            title: 'Tandoori Chicken on the Bone (Half)',
+            price: 1200,
+            description: '',
+            image: 'https://images.pexels.com/photos/5031943/pexels-photo-5031943.jpeg?auto=compress&cs=tinysrgb&w=1260&h=750&dpr=2',
+          },
+          {
+            id: 'bbq3',
+            title: 'Tandoori Chicken on the Bone (Full)',
+            price: 1800,
+            description: '',
+            image: 'https://images.pexels.com/photos/20371522/pexels-photo-20371522/free-photo-of-meat-on-plate.jpeg?auto=compress&cs=tinysrgb&w=1260&h=750&dpr=2',
+          },
+          {
+            id: 'bbq4',
+            title: 'Shish Kebab',
+            price: 1150,
+            description: '',
+            image: 'https://images.pexels.com/photos/2233729/pexels-photo-2233729.jpeg',
+          },
+          {
+            id: 'bbq5',
+            title: 'Chooza Chicken',
+            price: 1800,
+            description: '',
+            image: 'https://images.pexels.com/photos/6210876/pexels-photo-6210876.jpeg?auto=compress&cs=tinysrgb&w=1260&h=750&dpr=2',
+          },
+          {
+            id: 'bbq6',
+            title: 'Paneer Tikka',
+            price: 1050,
+            description: '',
+            image: 'https://images.pexels.com/photos/2741461/pexels-photo-2741461.jpeg',
+          },
+          {
+            id: 'bbq7',
+            title: 'Tandoori Vegetable Seek',
+            price: 800,
+            description: '',
+            image: 'https://images.pexels.com/photos/2092916/pexels-photo-2092916.jpeg?auto=compress&cs=tinysrgb&w=1260&h=750&dpr=2',
+          },
+        ];
+
+        const muttonDishes = [
+          {
+            id: 'md1',
+            title: 'Mutton Tikka Masala',
+            price: 1150,
+            description: 'Tandoored Mutton cubes in special masala sauce',
+            image: 'https://images.pexels.com/photos/6419694/pexels-photo-6419694.jpeg?auto=compress&cs=tinysrgb&w=1260&h=750&dpr=2',
+          },
+          {
+            id: 'md2',
+            title: 'Mutton Vindaloo',
+            price: 1150,
+            description: 'Mutton cubes cooked in hot spicy vindaloo sauce',
+            image: 'https://images.pexels.com/photos/18852549/pexels-photo-18852549/free-photo-of-hand-holding-meal-with-meat-on-bone.jpeg?auto=compress&cs=tinysrgb&w=1260&h=750&dpr=2',
+          },
+          {
+            id: 'md3',
+            title: 'Dry Chili Garlic Mutton',
+            price: 1150,
+            description: 'Mutton slices cooked with spices, garlic, chili, tomato, and onion',
+            image: 'https://plus.unsplash.com/premium_photo-1689596509991-fd47c16f3e7a?q=80&w=3270&auto=format&fit=crop&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D',
+          },
+          {
+            id: 'md4',
+            title: 'Keema Mattar',
+            price: 1150,
+            description: 'Mutton mince cooked with peas and masala',
+            image: 'https://images.pexels.com/photos/5409014/pexels-photo-5409014.jpeg?auto=compress&cs=tinysrgb&w=1260&h=750&dpr=2',
+          },
+          {
+            id: 'md5',
+            title: 'Coconut Cream Mutton',
+            price: 1150,
+            description: 'Mutton cubes in a creamy coconut enriched gravy',
+            image: 'https://images.pexels.com/photos/6123071/pexels-photo-6123071.jpeg?auto=compress&cs=tinysrgb&w=1260&h=750&dpr=2',
+          },
+        ];
+
+        const ricePilauBiryani = [
+          {
+            id: 'rb1',
+            title: 'Plain Basmati Rice',
+            price: 300,
+            description: '',
+            image: 'https://images.pexels.com/photos/8250738/pexels-photo-8250738.jpeg?auto=compress&cs=tinysrgb&w=800',
+          },
+          {
+            id: 'rb2',
+            title: 'Mutton Biryani',
+            price: 950,
+            description: '',
+            image: 'https://images.pexels.com/photos/9609863/pexels-photo-9609863.jpeg',
+          },
+          {
+            id: 'rb3',
+            title: 'Chicken Biryani',
+            price: 950,
+            description: '',
+            image: 'https://images.pexels.com/photos/23830980/pexels-photo-23830980/free-photo-of-close-up-of-a-dish-with-rice-and-chicken.jpeg?auto=compress&cs=tinysrgb&w=1260&h=750&dpr=2',
+          },
+            {
+              id: 'rb4',
+              title: 'Steamed Rice',
+              price: 300,
+              description: 'Fluffy and perfectly steamed white rice.',
+              image: 'https://images.pexels.com/photos/8423376/pexels-photo-8423376.png?auto=compress&cs=tinysrgb&w=800',
+            },
+            {
+              id: 'rb5',
+              title: 'Egg Fried Rice',
+              price: 450,
+              description: 'Fried rice with scrambled eggs and light seasoning.',
+              image: 'https://images.pexels.com/photos/28503596/pexels-photo-28503596/free-photo-of-delicious-egg-fried-rice-in-blue-bowl.jpeg?auto=compress&cs=tinysrgb&w=800',
+            },
+            {
+              id: 'rb6',
+              title: 'Vegetable Fried Rice',
+              price: 450,
+              description: 'Fried rice with fresh vegetables and aromatic spices.',
+              image: 'https://images.pexels.com/photos/5835353/pexels-photo-5835353.jpeg?auto=compress&cs=tinysrgb&w=800',
+            },
+            {
+              id: 'rb7',
+              title: 'Chicken Fried Rice',
+              price: 650,
+              description: 'Fried rice with tender chicken pieces and flavorful spices.',
+              image: 'https://images.pexels.com/photos/28041439/pexels-photo-28041439/free-photo-of-plate-with-spicy-instant-noodles-white-rice-fried-chicken-with-sambal-cucumber-and-tomato-a-packet-of-indomie-mi-goreng-rasa-ayam-geprek-noodles-is-placed-next-to-the-plate.jpeg?auto=compress&cs=tinysrgb&w=800',
+            },
+            {
+              id: 'rb8',
+              title: 'Beef Fried Rice',
+              price: 650,
+              description: 'Fried rice with tender beef slices and a savory touch.',
+              image: 'https://images.pexels.com/photos/29160634/pexels-photo-29160634/free-photo-of-flavorful-shrimp-fried-rice-with-vegetables.jpeg?auto=compress&cs=tinysrgb&w=800',
+            },
+        ];
+
+        const naans = [
+          {
+            id: 'n1',
+            title: 'Plain Naan / Roti',
+            price: 200,
+            description: '',
+            image: 'https://images.pexels.com/photos/5835353/pexels-photo-5835353.jpeg?auto=compress&cs=tinysrgb&w=1260&h=750&dpr=2',
+          },
+          {
+            id: 'n2',
+            title: 'Butter Naan',
+            price: 250,
+            description: '',
+            image: 'https://images.pexels.com/photos/28497406/pexels-photo-28497406/free-photo-of-delicious-indian-curry-with-naan-bread.jpeg?auto=compress&cs=tinysrgb&w=1260&h=750&dpr=2',
+          },
+          {
+            id: 'n3',
+            title: 'Garlic Naan',
+            price: 250,
+            description: '',
+            image: 'https://images.pexels.com/photos/12737799/pexels-photo-12737799.jpeg?auto=compress&cs=tinysrgb&w=1260&h=750&dpr=2',
+          },
+          {
+            id: 'n4',
+            title: 'Cheese Naan',
+            price: 350,
+            description: '',
+            image: 'https://images.pexels.com/photos/23547666/pexels-photo-23547666/free-photo-of-rice-with-chicken-served-in-a-restaurant.jpeg?auto=compress&cs=tinysrgb&w=800',
+          },
+          {
+            id: 'n5',
+            title: 'Garlic Chili Cheese Naan',
+            price: 350,
+            description: '',
+            image: 'https://images.pexels.com/photos/815525/pexels-photo-815525.jpeg?auto=compress&cs=tinysrgb&w=800',
+          },
+        ];
+
+        const vegetarianAndNonVegetarianDishes = [
+          // Vegetarian Items
+          {
+            id: 'vd1',
+            title: 'Paneer Tikka',
+            price: 1150,
+            description: 'Tandoored Cottage Cheese Cubes marinated in spices',
+            image: 'https://images.pexels.com/photos/2741461/pexels-photo-2741461.jpeg',
+          },
+          {
+            id: 'vd2',
+            title: 'Makhani Paneer',
+            price: 1150,
+            description: 'Paneer in a spicy, rich tomato, butter and cream gravy',
+            image: 'https://images.pexels.com/photos/28674541/pexels-photo-28674541/free-photo-of-delicious-paneer-tikka-in-rich-tomato-gravy.jpeg?auto=compress&cs=tinysrgb&w=1260&h=750&dpr=2',
+          },
+          {
+            id: 'vd3',
+            title: 'Palak Paneer',
+            price: 1150,
+            description: 'Cubes of cottage cheese with ground spinach and spices',
+            image: 'https://images.pexels.com/photos/4958731/pexels-photo-4958731.jpeg?auto=compress&cs=tinysrgb&w=1260&h=750&dpr=2',
+          },
+          {
+            id: 'vd4',
+            title: 'Dry Chili Garlic Paneer',
+            price: 1150,
+            description: 'Paneer cooked in spices, garlic, chili, tomato, and onion',
+            image: 'https://images.pexels.com/photos/10522937/pexels-photo-10522937.jpeg?auto=compress&cs=tinysrgb&w=1260&h=750&dpr=2',
+          },
+          {
+            id: 'vd5',
+            title: 'Dahl Makhani',
+            price: 800,
+            description: 'Black lentils cooked in a spicy creamy sauce',
+            image: 'https://images.pexels.com/photos/5410403/pexels-photo-5410403.jpeg?auto=compress&cs=tinysrgb&w=1260&h=750&dpr=2',
+          },
+          {
+            id: 'vd6',
+            title: 'Fried Spring Rolls (Vegetables)',
+            price: 400,
+            description: '',
+            image: 'https://images.pexels.com/photos/840216/pexels-photo-840216.jpeg?auto=compress&cs=tinysrgb&w=800',
+          },
+          {
+            id: 'vd7',
+            title: 'Fried Dumplings (Vegetables)',
+            price: 400,
+            description: '',
+            image: 'https://images.pexels.com/photos/7287715/pexels-photo-7287715.jpeg?auto=compress&cs=tinysrgb&w=1260&h=750&dpr=2',
+          },
+          {
+            id: 'vd8',
+            title: 'Steamed Dumplings (Vegetables)',
+            price: 400,
+            description: '',
+            image: 'https://images.pexels.com/photos/24709066/pexels-photo-24709066/free-photo-of-dumplings-served-in-wooden-bowl.png?auto=compress&cs=tinysrgb&w=1260&h=750&dpr=2',
+          },
+            {
+              id: 'vd9',
+              title: 'Dry Chili Garlic Mushrooms',
+              price: 750,
+              description: '',
+              image: 'https://images.pexels.com/photos/16068590/pexels-photo-16068590/free-photo-of-a-bowl-of-ramen-with-meat-and-eggs.jpeg?auto=compress&cs=tinysrgb&w=1260&h=750&dpr=2',
+            },
+            {
+              id: 'vd10',
+              title: 'Stir Fry Mixed Vegetables',
+              price: 600,
+              description: '',
+              image: 'https://images.pexels.com/photos/10398944/pexels-photo-10398944.jpeg?auto=compress&cs=tinysrgb&w=800',
+            },
+            {
+              id: 'vd11',
+              title: 'Vegetable Sizzler',
+              price: 750,
+              description: '',
+              image: 'https://images.pexels.com/photos/20350178/pexels-photo-20350178/free-photo-of-food-on-plate.jpeg?auto=compress&cs=tinysrgb&w=800',
+            },
+        
+          // Non-Vegetarian Items
+          {
+            id: 'vd12',
+            title: 'Fried Spring Rolls (Chicken)',
+            quantity: '4 pieces',
+            price: 400,
+            description: '',
+            image: 'https://images.pexels.com/photos/14849252/pexels-photo-14849252.jpeg?auto=compress&cs=tinysrgb&w=1260&h=750&dpr=2',
+          },
+          {
+            id: 'vd13',
+            title: 'Fried Dumplings (Chicken, Pork or Prawn)',
+            quantity: '4 pieces',
+            price: 400,
+            description: '',
+            image: 'https://images.pexels.com/photos/27819681/pexels-photo-27819681/free-photo-of-a-platter-with-meat-vegetables-and-onions-on-it.jpeg?auto=compress&cs=tinysrgb&w=1260&h=750&dpr=2',
+          },
+          {
+            id: 'vd14',
+            title: 'Steamed Dumplings (Chicken, Pork or Prawn)',
+            quantity: '4 pieces',
+            price: 400,
+            description: '',
+            image: 'https://images.pexels.com/photos/2098120/pexels-photo-2098120.jpeg?auto=compress&cs=tinysrgb&w=1260&h=750&dpr=2',
+          },
+          {
+            id: 'vd15',
+            title: 'Crispy Chicken Wings with Garlic & Chili',
+            price: 950,
+            description: '',
+            image: 'https://images.pexels.com/photos/6210876/pexels-photo-6210876.jpeg?auto=compress&cs=tinysrgb&w=1260&h=750&dpr=2',
+          },
+          {
+            id: 'vd16',
+            title: 'Prawn Tempura',
+            quantity: '6 pieces',
+            price: 1450,
+            description: '',
+            image: 'https://images.pexels.com/photos/3622477/pexels-photo-3622477.jpeg?auto=compress&cs=tinysrgb&w=1260&h=750&dpr=2',
+          },
+          {
+            id: 'vd17',
+            title: 'Deep-fried Pork Spare Ribs',
+            price: 1150,
+            description: '',
+            image: 'https://images.pexels.com/photos/16014262/pexels-photo-16014262/free-photo-of-fries-meat-and-sausages.jpeg?auto=compress&cs=tinysrgb&w=800',
+          },
+        ];
+
+        const beefAndPork = [
+          // Beef Items
+          {
+            id: 'bp1',
+            title: 'Shredded Beef with Chili Sauce',
+            price: 1150,
+            description: 'Tender shredded beef cooked in a spicy chili sauce.',
+            image: 'https://images.pexels.com/photos/8697520/pexels-photo-8697520.jpeg?auto=compress&cs=tinysrgb&w=1260&h=750&dpr=2',
+          },
+          {
+            id: 'bp2',
+            title: 'Beef in Oyster Sauce',
+            price: 1150,
+            description: 'Beef slices cooked in a rich oyster sauce.',
+            image: 'https://images.pexels.com/photos/299347/pexels-photo-299347.jpeg?auto=compress&cs=tinysrgb&w=1260&h=750&dpr=2',
+          },
+          {
+            id: 'bp3',
+            title: 'Beef in Black Bean Sauce',
+            price: 1150,
+            description: 'Beef cooked with black bean sauce for a savory flavor.',
+            image: 'https://images.pexels.com/photos/2098116/pexels-photo-2098116.jpeg?auto=compress&cs=tinysrgb&w=1260&h=750&dpr=2',
+          },
+          {
+            id: 'bp4',
+            title: 'Beef with Green Pepper',
+            price: 1150,
+            description: 'Beef stir-fried with fresh green peppers.',
+            image: 'https://images.pexels.com/photos/19503835/pexels-photo-19503835/free-photo-of-mouth-watering-meat-with-vegetables.jpeg?auto=compress&cs=tinysrgb&w=1260&h=750&dpr=2',
+          },
+          {
+            id: 'bp5',
+            title: 'Dry Chili Beef',
+            price: 1150,
+            description: 'Beef cooked with dry chili for a spicy kick.',
+            image: 'https://images.pexels.com/photos/13749940/pexels-photo-13749940.jpeg?auto=compress&cs=tinysrgb&w=1260&h=750&dpr=2',
+          },
+          {
+            id: 'bp6',
+            title: 'Beef Chop Suey',
+            price: 1150,
+            description: 'Beef stir-fried with mixed vegetables in a savory sauce.',
+            image: 'https://images.pexels.com/photos/17772829/pexels-photo-17772829/free-photo-of-meat-served-in-a-restaurant.jpeg?auto=compress&cs=tinysrgb&w=800',
+          },
+          {
+            id: 'bp7',
+            title: 'Beef Sizzler',
+            price: 1250,
+            description: 'Sizzling beef served with vegetables and spices.',
+            image: 'https://images.pexels.com/photos/361184/asparagus-steak-veal-steak-veal-361184.jpeg?auto=compress&cs=tinysrgb&w=1260&h=750&dpr=2',
+          },
+        
+          // Pork Items
+          {
+            id: 'bp8',
+            title: 'Sweet & Sour Pork',
+            price: 1200,
+            description: 'Pork cooked in a sweet and sour sauce with vegetables.',
+            image: 'https://images.pexels.com/photos/15797951/pexels-photo-15797951/free-photo-of-stir-fried-sweet-and-sour-sauce-with-vegetables-in-a-white-dish-on-a-white-isolated-background-thai-food-top-view.jpeg?auto=compress&cs=tinysrgb&w=1260&h=750&dpr=2',
+          },
+          {
+            id: 'bp9',
+            title: 'Shredded Pork',
+            price: 1200,
+            description: 'Shredded pork stir-fried with spices and vegetables.',
+            image: 'https://images.pexels.com/photos/410648/pexels-photo-410648.jpeg?auto=compress&cs=tinysrgb&w=800',
+          },
+          {
+            id: 'bp10',
+            title: 'Pork Sizzler',
+            price: 1300,
+            description: 'Sizzling pork served with vegetables and spices.',
+            image: 'https://images.pexels.com/photos/236887/pexels-photo-236887.jpeg?auto=compress&cs=tinysrgb&w=1260&h=750&dpr=2',
+          },
+        ];
+
+        const seafoodChowMeinAndPasta = [
+          // Seafood Items
+          {
+            id: 'sf1',
+            title: 'Sweet and Sour Prawns',
+            price: 1550,
+            description: 'Prawns cooked in a tangy sweet and sour sauce.',
+            image: 'https://images.pexels.com/photos/725997/pexels-photo-725997.jpeg?auto=compress&cs=tinysrgb&w=1260&h=750&dpr=2',
+          },
+          {
+            id: 'sf2',
+            title: 'Prawns with Hot Garlic Sauce & Vegetables',
+            price: 1550,
+            description: 'Prawns stir-fried with hot garlic sauce and fresh vegetables.',
+            image: 'https://images.pexels.com/photos/725997/pexels-photo-725997.jpeg?auto=compress&cs=tinysrgb&w=1260&h=750&dpr=2', // Placeholder image
+          },
+          {
+            id: 'sf3',
+            title: 'Dry Chili Garlic Calamari',
+            price: 1000,
+            description: 'Calamari cooked with dry chili and garlic for a spicy kick.',
+            image: 'https://images.pexels.com/photos/725997/pexels-photo-725997.jpeg?auto=compress&cs=tinysrgb&w=1260&h=750&dpr=2', // Placeholder image
+          },
+        
+          // Chow Mein Items
+          {
+            id: 'cm1',
+            title: 'Vegetable Noodles',
+            price: 750,
+            description: 'Stir-fried noodles with fresh vegetables.',
+            image: 'https://images.pexels.com/photos/5848496/pexels-photo-5848496.jpeg?auto=compress&cs=tinysrgb&w=800',
+          },
+          {
+            id: 'cm2',
+            title: 'Pork Noodles',
+            price: 1050,
+            description: 'Stir-fried noodles with tender pork slices.',
+            image: 'https://images.pexels.com/photos/698549/pexels-photo-698549.jpeg?auto=compress&cs=tinysrgb&w=1260&h=750&dpr=2',
+          },
+          {
+            id: 'cm3',
+            title: 'Chicken Noodles',
+            price: 1050,
+            description: 'Stir-fried noodles with flavorful chicken pieces.',
+            image: 'https://images.pexels.com/photos/19264273/pexels-photo-19264273/free-photo-of-close-up-of-meal-in-bowl.jpeg?auto=compress&cs=tinysrgb&w=800',
+          },
+          {
+            id: 'cm4',
+            title: 'Beef Noodles',
+            price: 1050,
+            description: 'Stir-fried noodles with tender beef slices.',
+            image: 'https://images.pexels.com/photos/2591594/pexels-photo-2591594.jpeg?auto=compress&cs=tinysrgb&w=800',
+          },
+        
+          // Pasta Items
+          {
+            id: 'pa1',
+            title: 'Spaghetti Bolognaise',
+            price: 750,
+            description: 'Classic spaghetti with rich bolognaise sauce and Parmesan cheese.',
+            image: 'https://images.unsplash.com/photo-1598866594230-a7c12756260f?ixlib=rb-1.2.1&auto=format&fit=crop&w=1350&q=80',
+          },
+          {
+            id: 'pa2',
+            title: 'Spaghetti Diablo',
+            price: 650,
+            description: 'Spaghetti with olive oil, garlic, fresh chilies, and Parmesan cheese.',
+            image: 'https://images.unsplash.com/photo-1473093295043-cdd812d0e601?ixlib=rb-1.2.1&auto=format&fit=crop&w=1350&q=80',
+          },
+        ];
+
 function ServiceDetails() {
   const { id } = useParams();
   const navigate = useNavigate(); // Initialize navigate
@@ -922,16 +943,24 @@ function ServiceDetails() {
   // Function to get the service items based on the service ID
   const getServiceItems = (serviceId) => {
     switch (serviceId) {
-      case '1': return carRepairServices;
-      case '2': return mechElectricalServices;
-      case '3': return paintBodyServices;
-      case '4': return diagnosticServices;
-      case '5': return accidentRepairServices;
-      case '6': return maintenanceServices;
-      case '7': return tireServices;
-      case '8': return vehicleDetailingAndTuningServices;
-      case '9': return brakeAndSuspensionServices;
-      case '10': return batteryServices;
+      case '1': return germanSpecialties;
+      case '2': return breakfast ;
+      case '3': return soups;
+      case '4': return lightMealsAndSnacks;
+      case '5': return chicken;
+      case '6': return fish;
+      case '7': return salads;
+      case '8': return lambAndPork;
+      case '9': return vegetarianDishes;
+      case '10': return cocktails;
+      case '11': return indianWraps;
+      case '12': return bbq;
+      case '13': return muttonDishes;
+      case '14': return ricePilauBiryani;
+      case '15': return naans;
+      case '16': return vegetarianAndNonVegetarianDishes;
+      case '17': return beefAndPork;
+      case '18': return seafoodChowMeinAndPasta;   
       default: return [];
     }
   };
@@ -947,12 +976,6 @@ function ServiceDetails() {
     <div className="min-h-screen bg-gray-50 pt-20 pb-10">
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
         <h1 className="text-4xl mb-8">Available Services</h1>
-        <img
-          src="https://i.postimg.cc/gJCNMjt8/brenxlogo.jpg"
-          alt="Promotional Banner"
-          className="w-28 h-8 object-cover mb-8"
-        />
-
         <div className="grid grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-4">
           {serviceItems.map((item) => (
             <div key={item.id} className="bg-white rounded-lg shadow-lg overflow-hidden max-w-xs">

@@ -110,7 +110,7 @@ function Navbar() {
               onMouseEnter={handleMouseEnter}
               onMouseLeave={handleMouseLeave}
             >
-              SERVICES <FiChevronDown className="ml-1" />
+              OUR MENU <FiChevronDown className="ml-1" />
               {showDropdown && (
                 <div className="absolute top-full left-0 bg-blue-100 shadow-lg rounded-lg mt-2 w-64 z-50">
                   <ul className="text-black">
@@ -198,7 +198,7 @@ function Navbar() {
                 className="flex items-center nav-link bg-white text-black px-3 py-2 rounded-md hover:bg-blue-700 transition-colors w-full"
                 onClick={() => setShowMobileDropdown(!showMobileDropdown)}
               >
-                <FiTool className="mr-2" /> Services <FiChevronDown className="ml-1" />
+                <FiTool className="mr-2" /> Our Menu <FiChevronDown className="ml-1" />
               </button>
               {showMobileDropdown && (
                 <ul className="bg-white shadow-lg rounded-lg mt-2 w-full text-black">

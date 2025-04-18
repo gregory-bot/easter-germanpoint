@@ -138,7 +138,6 @@ function OffersPage() {
       image: offer.image,
       quantity: 1
     });
-    alert(`${offer.title} has been added to your cart!`);
   };
 
   useEffect(() => {
