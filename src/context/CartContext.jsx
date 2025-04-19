@@ -4,9 +4,9 @@ const CartContext = createContext();
 
 export function CartProvider({ children }) {
   const [cartItems, setCartItems] = useState(() => {
-    // Load the cart from localStorage on initial load
-    const savedCart = localStorage.getItem('cart');
-    return savedCart ? JSON.parse(savedCart) : [];
+    // Clear the cart from localStorage on initial load
+    localStorage.removeItem('cart');
+    return [];
   });
 
   useEffect(() => {
