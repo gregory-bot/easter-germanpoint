@@ -79,7 +79,7 @@ const ContactSection = () => {
           <div className="text-center mb-8">
             <div className="flex items-center justify-center gap-4">
             <div className="h-px w-80 bg-red-600"></div>
-              <h2 className="text-4xl font-bold text-blue-600" style={{ fontFamily: 'Courier, monospace' }}>German Point</h2>
+              <h2 className="text-4xl font-bold text-red-600" style={{ fontFamily: 'Courier, monospace' }}>German Point</h2>
               <div className="h-px w-80 bg-red-600"></div>
             </div>
             <p className="text-white mt-2">Authentic German cuisine foods since 1999</p>
