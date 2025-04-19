@@ -3,28 +3,28 @@ import { ChevronDown, ChevronUp } from 'lucide-react';
 
 const faqData = [
   {
-    question: "What services do you offer?",
-    answer: "At Brenxx Auto garage we offer Car Repair & Service, Mechanical & Electrical Repairs, Vehicle Diagnostics, oil changes, brake repairs, engine diagnostics, tire services, transmission repairs, and general maintenance."
+    question: "What type of cuisine do you serve?",
+    answer: "We specialize in a variety of cuisines, including German, AFrican, and Indian dishes, with options for vegetarians and non-vegetarians."
   },
   {
-    question: "What are your business hours?",
-    answer: "We are open Monday through Friday from 8:00 AM to 6:00 PM, and Saturdays from 9:00 AM to 4:00 PM."
+    question: "What are your operating hours?",
+    answer: "We are open Monday to Sunday from 7:00 AM to 11:00 PM. Our kitchen closes at 10:30 PM."
   },
   {
-    question: "Do you offer warranties on your services?",
-    answer: "Yes, we provide warranties on all our services and parts. Our standard labor warranty is 12 months or 12,000 miles, whichever comes first. Specific parts may have different warranty terms which will be discussed during service."
+    question: "Do you offer reservations?",
+    answer: "Yes, we recommend making reservations, especially during weekends and holidays. You can book a table through our website or by calling us directly."
   },
   {
-    question: "How do I schedule an appointment?",
-    answer: "You can schedule an appointment through our Website booking system, WhatsApp link on the website, or by visiting us in person. We recommend booking in advance to ensure we can accommodate your preferred time slot."
+    question: "Do you provide takeaway or delivery services?",
+    answer: "Yes, we offer both takeaway and delivery services. You can place your order through our website or partner food delivery apps."
   },
   {
-    question: "What forms of payment do you accept?",
-    answer: "We accept all major credit cards, debit cards, cash, and certified checks. We also offer financing options for larger repairs through our financing partners."
+    question: "Do you accommodate dietary restrictions?",
+    answer: "Absolutely! We offer gluten-free, vegan, and allergy-friendly options. Please inform our staff about your dietary requirements when placing your order."
   },
   {
-    question: "Do you offer emergency services?",
-    answer: "Yes, we provide emergency services and towing during business hours. For after-hours emergencies, we partner with local towing services to get your vehicle to our garage safely."
+    question: "Do you host private events or parties?",
+    answer: "Yes, we have private dining spaces available for events, parties, and corporate gatherings. Contact us for more details and reservations."
   }
 ];
 

@@ -1,4 +1,5 @@
 import { useState, useEffect, useRef } from 'react';
+import { FaArrowUp, FaPhoneAlt } from 'react-icons/fa'; // Import icons
 
 export default function ChatWidget() {
   const [isOpen, setIsOpen] = useState(false);
@@ -32,43 +33,94 @@ export default function ChatWidget() {
     setIsBotTyping(true); // Show typing indicator
     setTimeout(() => {
       const serviceResponses = {
-        'diagnostics':
-          'We offer advanced vehicle diagnostics to identify and resolve issues efficiently. How can we assist you further?',
-        'mechanical repairs':
-          'Our team specializes in mechanical repairs for all types of vehicles. What specific issue are you facing?',
-        'maintenance':
-          'Regular maintenance is key to keeping your vehicle in top condition. We provide comprehensive maintenance services. Would you like to schedule an appointment?',
-        'accident repairs':
-          'We handle accident repairs with precision and care. Bring your vehicle in for an assessment, and we’ll get it back on the road.',
-        'spray painting':
-          'Our professional spray painting services ensure your vehicle looks as good as new. What color are you considering?',
+        'german specialties':
+          'We offer authentic German specialties prepared with traditional recipes. Would you like to know more about our dishes?',
+        'breakfast':
+          'Start your day with our delicious breakfast options, including continental and hearty meals. Can we help you choose?',
+        'soups':
+          'Our soups are made fresh daily, offering a perfect start to your meal. Would you like to hear about today’s specials?',
+        'light meals':
+          'We have a variety of light meals and snacks, perfect for a quick bite. What are you in the mood for?',
+        'chicken dishes':
+          'Our chicken dishes are cooked to perfection with a variety of flavors. Would you like recommendations?',
+        'fish dishes':
+          'Enjoy our fresh and flavorful fish dishes, prepared with the finest ingredients. Can we suggest something for you?',
+        'salads':
+          'Our salads are fresh, healthy, and full of flavor. Would you like to know about our vegetarian options?',
+        'lamb and pork':
+          'We serve tender lamb and pork dishes that are sure to delight. Would you like to try one of our specialties?',
+        'vegetarian dishes':
+          'We offer a wide range of vegetarian dishes, crafted with fresh ingredients. Can we help you pick one?',
+        'cocktails and beverages':
+          'Our cocktails and beverages menu features refreshing drinks to complement your meal. What would you like to try?',
+        'indian wraps':
+          'Our Indian wraps are packed with bold flavors and fresh ingredients. Would you like to know more?',
+        'bbq':
+          'Our BBQ dishes are grilled to perfection, offering a smoky and savory experience. Can we recommend something?',
+        'mutton dishes':
+          'Our mutton dishes are rich in flavor and cooked with traditional spices. Would you like to explore our menu?',
+        'rice and biryani':
+          'We serve aromatic rice dishes, including pilau and biryani. Would you like to hear about our specials?',
+        'naans':
+          'Our naans are freshly baked and pair perfectly with our curries. Would you like to try one?',
+        'seafood':
+          'Our seafood dishes are fresh and flavorful, offering a taste of the ocean. Can we suggest something for you?',
+        'offers':
+          'We have exciting offers available! Would you like to know more about our current promotions?',
       };
 
       const greetings = ['hello', 'hi', 'hey', 'mambo', 'sasa', 'niaje', 'vipi', 'habari', 'how are you', 'good afternoon', 'good morning', 'good evening', 'uko aje', 'greetings'];
       const serviceKeywords = [
-        'diagnostics',
-        'mechanical',
-        'repairs',
-        'maintenance',
-        'accident',
-        'spray',
-        'painting',
-        'vehicle',
-        'car',
-        'service',
+        'german',
+        'specialties',
+        'breakfast',
+        'soups',
+        'light meals',
+        'snacks',
+        'chicken',
+        'fish',
+        'salads',
+        'lamb',
+        'pork',
+        'vegetarian',
+        'dishes',
+        'cocktails',
+        'beverages',
+        'indian',
+        'wraps',
+        'bbq',
+        'mutton',
+        'rice',
+        'pilau',
+        'biryani',
+        'naans',
+        'beef',
+        'seafood',
+        'chow mein',
+        'pasta',
+        'offers',
       ];
 
       const services = [
-        { id: 1, name: "Car Repair & Service" },
-        { id: 2, name: "Mechanical & Electrical Repairs" },
-        { id: 3, name: "Paint & Body Work" },
-        { id: 4, name: "Vehicle Diagnostics" },
-        { id: 5, name: "Accident Repairs" },
-        { id: 6, name: "Maintenance Services" },
-        { id: 7, name: "Tire Services" },
-        { id: 8, name: "Vehicle Detailing" },
-        { id: 9, name: "Brake & Suspension Services" },
-        { id: 10, name: "Battery Check & Replacement" },
+        { id: 1, name: "German Specialties" },
+        { id: 2, name: "Breakfast" },
+        { id: 3, name: "Soups" },
+        { id: 4, name: "Light Meals & Snacks" },
+        { id: 5, name: "Chicken Dishes" },
+        { id: 6, name: "Fish Dishes" },
+        { id: 7, name: "Salads" },
+        { id: 8, name: "Lamb & Pork" },
+        { id: 9, name: "Vegetarian Dishes" },
+        { id: 10, name: "Cocktails & Beverages" },
+        { id: 11, name: "Indian Wraps" },
+        { id: 12, name: "BBQ" },
+        { id: 13, name: "Mutton Dishes" },
+        { id: 14, name: "Rice/Pilau/Biryani" },
+        { id: 15, name: "Naans" },
+        { id: 16, name: "Vegetarian & Non-Vegetarian Dishes" },
+        { id: 17, name: "Beef & Pork" },
+        { id: 18, name: "Seafood, Chow Mein & Pasta" },
+        { id: 19, name: "Offers" },
       ];
 
       const userRequest = newMessage.trim().toLowerCase();
@@ -92,7 +144,7 @@ export default function ChatWidget() {
             .join('\n')}\n\nCheck our website for more details!`;
         } else {
           botResponse =
-            'I’m here to help! You can ask about our services like "Vehicle Diagnostics", "Mechanical Repairs", or "Spray Painting".';
+          'I’m here to help! You can ask about our menu items like "German Specialties", "Breakfast", or "Cocktails & Beverages".';
 
         }
       }
@@ -111,7 +163,7 @@ export default function ChatWidget() {
       {/* Chat Button */}
       <button
         onClick={() => setIsOpen(!isOpen)}
-        className="fixed bottom-6 right-6 bg-blue-600 text-white p-4 rounded-full shadow-lg hover:bg-green-700 transition duration-300 z-50"
+        className="fixed bottom-6 right-6 bg-red-600 text-white p-4 rounded-full shadow-lg hover:bg-black transition duration-300 z-50"
       >
         <svg
           xmlns="http://www.w3.org/2000/svg"
@@ -127,6 +179,24 @@ export default function ChatWidget() {
             d="M8 10h.01M12 10h.01M16 10h.01M9 16H5a2 2 0 01-2-2V6a2 2 0 012-2h14a2 2 0 012 2v8a2 2 0 01-2 2h-5l-5 5v-5z"
           />
         </svg>
+      </button>
+
+      {/* Phone Call FAB */}
+      <a
+        href="tel:+254798363800" // Replace with your phone number
+        className="fixed bottom-20 left-6 bg-green-500 text-white p-4 rounded-full shadow-lg hover:bg-green-600 transition duration-300 z-50"
+        aria-label="Call Us"
+      >
+        <FaPhoneAlt size={20} />
+      </a>
+
+      {/* Back to Top Button */}
+      <button
+        onClick={() => window.scrollTo({ top: 0, behavior: "smooth" })}
+        className="fixed bottom-6 left-6 bg-blue-600 hover:bg-blue-700 text-white p-3 rounded-full shadow-lg transition-all duration-300 z-50"
+        aria-label="Scroll to top"
+      >
+        <FaArrowUp size={15} />
       </button>
 
       {/* Chat Widget */}
@@ -204,7 +274,7 @@ export default function ChatWidget() {
             />
             <button
               type="submit"
-              className="bg-blue-600 text-white px-4 py-2 rounded-lg hover:bg-red-700 transition duration-300"
+              className="bg-red-600 text-white px-4 py-2 rounded-lg hover:bg-red-700 transition duration-300"
             >
               send
             </button>

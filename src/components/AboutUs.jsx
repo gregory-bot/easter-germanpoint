@@ -2,39 +2,39 @@ import { useState, useEffect } from "react";
 import { motion } from "framer-motion";
 
 const images = [
-  "https://i.postimg.cc/vZ7Pm70N/brand.jpg",
-  "https://i.postimg.cc/02C2fmtz/xx.jpg",
-  "https://i.postimg.cc/jjfHL0rv/IMG-20250227-WA0032-1.jpg",
-  "https://i.postimg.cc/mgVbZNXw/towing.jpg",
-  "https://i.postimg.cc/xCLwRvxK/diagnostics.jpg",
-  "https://i.postimg.cc/jdGQHDjn/yyjj.jpg",
+  "https://i.postimg.cc/Zqn94Nsw/about1.jpg",
+  "https://images.pexels.com/photos/2529468/pexels-photo-2529468.jpeg?auto=compress&cs=tinysrgb&w=1260&h=750&dpr=2",
+  "https://i.postimg.cc/N0mmhj4f/5.jpg",
+  "https://i.postimg.cc/1zDC15gR/jh.jpg",
+  "https://i.postimg.cc/9FXYrQsN/43.jpg",
+  "https://i.postimg.cc/MZnDyCg5/non.jpg",
 ];
 
 const testimonials = [
   {
-    image: "https://i.postimg.cc/mgH72kL9/yyjj.jpg",
+    image: "https://i.postimg.cc/0N16Ktb2/52.jpg",
     name: "Brian",
-    feedback: "Highly recommended!",
+    feedback: "I really experienced the cuisine😅, and the service was excellent!",
   },
   {
-    image: "https://i.postimg.cc/Y9w5yv9z/ilo.jpg",
-    name: "Peter",
-    feedback: "Professional and reliable.",
+    image: "https://i.postimg.cc/8cpbqPbr/666.jpg",
+    name: "Mercy",
+    feedback: "A wonderful dining experience with a cozy ambiance.",
   },
   {
-    image: "https://i.postimg.cc/xCLwRvxK/diagnostics.jpg",
+    image: "https://i.postimg.cc/8Pnb0Gfj/890.jpg",
     name: "Michael Mwangi",
-    feedback: "Great customer service and attention to detail.",
+    feedback: "Great variety of dishes and exceptional customer service.",
   },
   {
-    image: "https://i.postimg.cc/8cZx5wbZ/juja.jpg",
+    image: "https://i.postimg.cc/5015CNTk/344.jpg",
     name: "Paul",
-    feedback: "Quick and efficient service.",
+    feedback: "Quick service and the best desserts I've ever had!",
   },
   {
-    image: "https://i.postimg.cc/QNY6FB3Y/gall.jpg",
-    name: "Chris Wilson",
-    feedback: "Affordable and trustworthy. Will come back again!",
+    image: "https://i.postimg.cc/D0p1HQZt/aser.jpg",
+    name: "Cherera",
+    feedback: "Affordable prices and a fantastic atmosphere. Will visit again!",
   },
 ];
 
@@ -64,7 +64,7 @@ function AboutUs() {
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
         {/* Heading Above the Image Carousel */}
         <h2 className="text-4xl font-bold text-black mb-6 text-center">
-          About Brenxx
+          About German Point
         </h2>
 
         <div className="grid grid-cols-1 md:grid-cols-2 gap-8 items-center">
@@ -75,7 +75,7 @@ function AboutUs() {
                 key={imgIndex}
                 src={img}
                 alt="brenxx auto"
-                className="absolute inset-0 w-full h-full object-cover rounded-lg"
+                className="absolute inset-0 w-full h-full object-fix rounded-lg"
                 style={{ position: "absolute", top: 0, left: 0 }}
                 initial={{ opacity: imgIndex === index ? 1 : 0 }}
                 animate={{ opacity: imgIndex === index ? 1 : 0 }}
@@ -87,20 +87,14 @@ function AboutUs() {
 
           {/* About Us Content */}
           <div>
-            <p className="text-black mb-6">
-              We are a fully fledged and registered motor vehicle repair and
-              maintenance garage run by highly specialists in different fields.
+            <p className="text-xl text-black mb-6">
+            German Point has been serving authentic German cuisine since 1999. Our passion for traditional recipes and high-quality ingredients has made us a favorite among locals and tourists alike.
             </p>
-            <p className="text-black mb-6">
-              From motor vehicle diagnostics, mechanical repairs, maintenance
-              service, accident repairs plus professional spray painting, Brenxx
-              Auto got you covered.
+            <p className="text-xl text-black mb-6">
+            Our chefs blend classic German flavors with modern culinary techniques to create dishes that are both familiar and exciting. From hearty sausages to delicate pastries, we offer a taste of Germany right here in the heart of the city.
             </p>
-            <p className="text-black mb-6">
-              Located in Nairobi County along the 2nd Avenue – Garden estate,
-              with state of the art security system (including CCTV
-              Surveillance) that ensures our clients' vehicles are safe and
-              secure while they are at Brenxx Auto.
+            <p className="text-xl text-black mb-6">
+            Join us for a meal and experience the warmth of German hospitality and the rich flavors of our cuisine. Prost!
             </p>
           </div>
         </div>

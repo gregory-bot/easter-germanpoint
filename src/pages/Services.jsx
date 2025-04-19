@@ -62,7 +62,7 @@ const services = [
     id: 10,
     title: 'Cocktails & Beverages',
     description: 'Refreshing cocktails and beverages to complement your meal.',
-    image: 'https://i.postimg.cc/0N3GhLxC/adc.jpg',
+    image: 'https://i.postimg.cc/sDQm2sf7/cock.jpg',
   },
   {
     id: 11,

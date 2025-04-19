@@ -10,248 +10,226 @@ const Gallery = () => {
   const [images] = useState([
     {
       id: 1,
-      url: 'https://i.postimg.cc/RF7CphYW/xx.jpg',
-      title: 'Engine Repair',
-      serviceType: 'Mechanical'
+      url: 'https://i.postimg.cc/bNwJ0wSS/1.jpg',
+      title: 'Signature Dish',
+      category: 'Food',
     },
     {
       id: 2,
-      url: 'https://i.postimg.cc/7YYPXxnL/tire.jpg',
-      title: 'Wheel Alignment',
-      serviceType: 'Suspension'
+      url: 'https://i.postimg.cc/FRJmGQCX/er.jpg',
+      title: 'Appetizers Platter',
+      category: 'Food',
     },
     {
       id: 3,
-      url: 'https://i.postimg.cc/k5DfytBy/wash.jpg',
-      title: 'Premium Car Wash',
-      serviceType: 'Detailing'
+      url: 'https://i.postimg.cc/xjxY2yqq/2.jpg',
+      title: 'Main Course Variety',
+      category: 'Food',
     },
     {
       id: 4,
-      url: 'https://i.postimg.cc/4dgHxDkh/wheel.jpg',
-      title: 'Tire Service',
-      serviceType: 'Maintenance'
+      url: 'https://i.postimg.cc/xCpZW5g2/3.jpg',
+      title: 'Dessert Selection',
+      category: 'Food',
     },
     {
       id: 5,
-      url: 'https://i.postimg.cc/zB2NchjX/lx.jpg',
-      title: 'Luxury Detailing',
-      serviceType: 'Detailing'
+      url: 'https://i.postimg.cc/sDQm2sf7/cock.jpg',
+      title: 'Cocktails and Drinks',
+      category: 'Drinks',
     },
     {
       id: 6,
-      url: 'https://i.postimg.cc/g0w127qd/hi.jpg',
-      title: 'Brake Inspection',
-      serviceType: 'Safety'
+      url: 'https://i.postimg.cc/N0mmhj4f/5.jpg',
+      title: 'Chef in Action',
+      category: 'Experience',
     },
     {
       id: 7,
-      url: 'https://i.postimg.cc/FzJKbG4Q/bbh.jpg',
-      title: 'Oil Change',
-      serviceType: 'Maintenance'
+      url: 'https://i.postimg.cc/mgwPfpzJ/7.jpg',
+      title: 'Open Kitchen View',
+      category: 'Experience',
     },
     {
       id: 8,
-      url: 'https://i.postimg.cc/SxGczQdf/tty.jpg',
-      title: 'Transmission Service',
-      serviceType: 'Mechanical'
+      url: 'https://i.postimg.cc/1504hRfJ/8.jpg',
+      title: 'Dining Area',
+      category: 'Ambiance',
     },
     {
       id: 9,
-      url: 'https://i.postimg.cc/tRPk4jK2/ac.jpg',
-      title: 'AC Repair',
-      serviceType: 'Comfort'
+      url: 'https://i.postimg.cc/VsnknsBm/9.jpg',
+      title: 'Outdoor Seating',
+      category: 'Ambiance',
     },
     {
       id: 10,
-      url: 'https://i.postimg.cc/wj8L4f0M/batt.jpg',
-      title: 'Battery Service',
-      serviceType: 'Electrical'
+      url: 'https://i.postimg.cc/bJbpxLn3/11.jpg',
+      title: 'Private Dining Room',
+      category: 'Ambiance',
     },
     {
       id: 11,
-      url: 'https://i.postimg.cc/xdgs2D4t/exh.jpg',
-      title: 'Exhaust Repair',
-      serviceType: 'Mechanical'
+      url: 'https://i.postimg.cc/WzwVK3XZ/game.jpg',
+      title: 'Romantic Table Setup',
+      category: 'Ambiance',
     },
     {
       id: 12,
-      url: 'https://i.postimg.cc/g0q0c4VM/headl.jpg',
-      title: 'Headlight Restoration',
-      serviceType: 'Cosmetic'
+      url: 'https://i.postimg.cc/0ygng4m9/54.jpg',
+      title: 'Family Dining Moments',
+      category: 'Experience',
     },
     {
-        id: 13,
-        url: 'https://i.postimg.cc/gjS03Jj1/back.jpg',
-        title: 'Backlight Restoration',
-        serviceType: 'Cosmetic'
-      },
+      id: 13,
+      url: 'https://i.postimg.cc/kGmrcRtW/family.jpg',
+      title: 'Buffet Spread',
+      category: 'Food',
+    },
     {
       id: 14,
-      url: 'https://i.postimg.cc/5yTVxF69/wind.jpg',
-      title: 'Windshield Repair',
-      serviceType: 'Safety'
+      url: 'https://i.postimg.cc/PrvzmwVN/09.jpg',
+      title: 'Seasonal Specials',
+      category: 'Food',
     },
     {
       id: 15,
-      url: 'https://i.postimg.cc/QCMQj21J/dent.jpg',
-      title: 'Dent Removal',
-      serviceType: 'Cosmetic'
+      url: 'https://i.postimg.cc/1tzD4nNm/cult.jpg',
+      title: 'Cultural Cuisine',
+      category: 'Food',
     },
     {
       id: 16,
-      url: 'https://i.postimg.cc/kgc7SGHs/tow.jpg',
-      title: 'Towing Service',
-      serviceType: 'Emergency'
+      url: 'https://i.postimg.cc/LX00NZd5/89.jpg',
+      title: 'Fresh Ingredients',
+      category: 'Food',
     },
     {
       id: 17,
-      url: 'https://i.postimg.cc/7h05rDZR/nbn.jpg',
-      title: 'Classic Car Restoration',
-      serviceType: 'Restoration'
+      url: 'https://media-cdn.tripadvisor.com/media/photo-s/15/26/9a/e6/photo2jpg.jpg',
+      title: 'Restaurant Exterior',
+      category: 'Ambiance',
     },
     {
       id: 18,
-      url: 'https://i.postimg.cc/gJpyTMsm/bbm.jpg',
-      title: 'Performance Upgrade',
-      serviceType: 'Custom'
+      url: 'https://media-cdn.tripadvisor.com/media/photo-s/15/26/9a/e4/photo0jpg.jpg',
+      title: 'Happy Customers',
+      category: 'Experience',
     },
     {
       id: 19,
-      url: 'https://i.postimg.cc/0QZSH9r0/up.jpg',
-      title: 'Hybrid Service',
-      serviceType: 'Electrical'
+      url: 'https://i.postimg.cc/VNvhMFTp/66.jpg',
+      title: 'Live Music Night',
+      category: 'Experience',
     },
     {
       id: 20,
-      url: 'https://i.postimg.cc/5y6X7vhf/rust.jpg',
-      title: 'Rust Protection',
-      serviceType: 'Protection'
+      url: 'https://i.postimg.cc/g2Ts9bSt/55.jpg',
+      title: 'Special Events',
+      category: 'Experience',
     },
     {
       id: 21,
-      url: 'https://i.postimg.cc/BQF6jqs7/fgh.jpg',
-      title: 'Fleet Maintenance',
-      serviceType: 'Commercial'
+      url: 'https://i.postimg.cc/9FXYrQsN/43.jpg',
+      title: 'Birthday Celebration',
+      category: 'Experience',
     },
     {
       id: 22,
-      url: 'https://i.postimg.cc/sDJ2YTQ5/ggt.jpg',
-      title: 'Diagnostic Scan',
-      serviceType: 'Diagnostic'
+      url: 'https://i.postimg.cc/0N16Ktb2/52.jpg',
+      title: 'Laughter after smiles',
+      category: 'Experience',
     },
     {
-        id: 23,
-        url: 'https://media.istockphoto.com/id/946261062/photo/bottom-view-of-wheel-and-shock-absorber-of-vehicle.jpg?s=612x612&w=0&k=20&c=w-1POmKRJGzBLYRRDmyUPUcW0-2fGRuIDuLmyHsEP8U=',
-        title: 'Car Facelift',
-        serviceType: 'Cosmetic Upgrade'
-      },
+      id: 23,
+      url: 'https://i.postimg.cc/wMM3YZbF/42.jpg',
+      title: 'Kids’ Menu Highlights',
+      category: 'Food',
+    },
     {
       id: 24,
-      url: 'https://i.postimg.cc/SNVy2j3r/corr.jpg',
-      title: 'Paint Correction',
-      serviceType: 'Cosmetic'
+      url: 'https://i.postimg.cc/6Qx1F203/brea.jpg',
+      title: 'Healthy Options',
+      category: 'Food',
     },
     {
       id: 25,
-      url: 'https://i.postimg.cc/0NPQLFrp/int.jpg',
-      title: 'Interior Deep Cleaning',
-      serviceType: 'Detailing'
+      url: 'https://i.postimg.cc/bNwJ0wSS/1.jpg',
+      title: 'Seafood Specials',
+      category: 'Food',
     },
     {
       id: 26,
-      url: 'https://i.postimg.cc/VNKY2Nx8/alloy.jpg',
-      title: 'Alloy Wheel Repair',
-      serviceType: 'Cosmetic'
+      url: 'https://i.postimg.cc/PqKtfKD7/1235.jpg',
+      title: 'Grilled Delights',
+      category: 'Food',
     },
     {
       id: 27,
-      url: 'https://i.postimg.cc/28x8nT0y/ECU.jpg',
-      title: 'ECU Tuning',
-      serviceType: 'Performance'
+      url: 'https://i.postimg.cc/PxPNB07y/veges.jpg',
+      title: 'Vegetarian Favorites',
+      category: 'Food',
     },
     {
       id: 28,
-      url: 'https://i.postimg.cc/qMvWZLkz/engine44.jpg',
-      title: 'Engine Diagnostics',
-      serviceType: 'Diagnostic'
+      url: 'https://i.postimg.cc/MZfvt2VK/33.jpg',
+      title: 'Bar Area',
+      category: 'Ambiance',
     },
     {
       id: 29,
-      url: 'https://i.postimg.cc/WbdXkfN6/tinting.jpg',
-      title: 'Glass Tinting',
-      serviceType: 'Protection'
+      url: 'https://images.pexels.com/photos/302905/pexels-photo-302905.jpeg?auto=compress&cs=tinysrgb&w=600',
+      title: 'Coffee and Pastries',
+      category: 'Food',
     },
     {
       id: 30,
-      url: 'https://i.postimg.cc/tCGzmdFF/tow4.jpg',
-      title: 'Roadside Assistance',
-      serviceType: 'Emergency'
+      url: 'https://i.postimg.cc/dtmQSq1v/uuy.jpg',
+      title: 'Takeaway Packaging',
+      category: 'Experience',
     },
     {
       id: 31,
-      url: 'https://i.postimg.cc/TwXwXP0N/ceramic.jpg',
-      title: 'Ceramic Coating',
-      serviceType: 'Detailing',
-      premium: true
+      url: 'https://th.bing.com/th/id/R.29a22adc6a1cc6cbdc45fa8a3994abd1?rik=pol1KY236%2feReQ&pid=ImgRaw&r=0',
+      title: 'Delivery Service',
+      category: 'Experience',
     },
     {
       id: 32,
-      url: 'https://i.postimg.cc/DyYww65X/paint.jpg',
-      title: 'Paint Protection Film',
-      serviceType: 'Protection',
-      premium: true
+      url: 'https://i.postimg.cc/DyKLXyHK/tail.jpg',
+      title: 'Wine Collection',
+      category: 'Drinks',
     },
     {
       id: 33,
-      url: 'https://i.postimg.cc/W3pBrL1b/roof.jpg',
-      title: 'Convertible Top Repair',
-      serviceType: 'Restoration'
+      url: 'https://i.postimg.cc/yYNp2j6d/ere.jpg',
+      title: 'Cocktail Bar Setup',
+      category: 'Drinks',
     },
     {
       id: 34,
-      url: 'https://i.postimg.cc/FKpqhWVt/wheelall.jpg',
-      title: 'Laser Wheel Alignment',
-      serviceType: 'Suspension'
+      url: 'https://media.istockphoto.com/id/938158500/photo/breakfast-table.jpg?b=1&s=612x612&w=0&k=20&c=NsGhEiw5lyT6OFqHl7l8LKt3l3Qf23Xw1w3ZIiRDktg=',
+      title: 'Breakfast Spread',
+      category: 'Food',
     },
     {
       id: 35,
-      url: 'https://i.postimg.cc/c4qN9zDT/bbh.jpg',
-      title: 'AdBlue System Service',
-      serviceType: 'Mechanical'
+      url: 'https://i.postimg.cc/sD2NGrLK/men.jpg',
+      title: 'Lunch Specials',
+      category: 'Food',
     },
     {
       id: 36,
-      url: 'https://i.postimg.cc/QCQYnftn/zz.jpg',
-      title: 'Start-Stop System Repair',
-      serviceType: 'Electrical'
+      url: 'https://i.postimg.cc/1zDC15gR/jh.jpg',
+      title: 'Dinner Highlights',
+      category: 'Food',
     },
     {
       id: 37,
-      url: 'https://i.postimg.cc/rsMNzMVQ/nnv.jpg',
-      title: 'EV Battery Check',
-      serviceType: 'Electrical',
-      premium: true
+      url: 'https://i.postimg.cc/85XfcM91/bgh.jpg',
+      title: 'Restaurant Staff Team',
+      category: 'Experience',
     },
-    {
-      id: 38,
-      url: 'https://i.postimg.cc/D0SyrbwZ/tyu.jpg',
-      title: 'Advanced ECU Remapping',
-      serviceType: 'Performance',
-      premium: true
-    },
-    {
-      id: 39,
-      url: 'https://i.postimg.cc/y8H3HvNy/loli.jpg',
-      title: 'Leather Restoration',
-      serviceType: 'Restoration'
-    },
-    {
-      id: 40,
-      url: 'https://media.istockphoto.com/id/2176130640/photo/close-up-view-of-car-undercarriage-in-a-repair-workshop.jpg?s=612x612&w=0&k=20&c=fWgc5wrPTx57ASr5QWXddhIejlrcg_VJBL-m6ii7bTg=',
-      title: 'Undercarriage Cleaning',
-      serviceType: 'Detailing'
-    }    
   ]);
 
   // Group images into pairs for horizontal display

@@ -59,7 +59,7 @@ const ContactSection = () => {
       <footer
         className="bg-gray-800 text-white py-12"
         style={{
-          backgroundImage: "url('https://images.pexels.com/photos/31558503/pexels-photo-31558503/free-photo-of-vintage-car-steering-wheel-in-soft-light.jpeg?auto=compress&cs=tinysrgb&w=600')",
+          backgroundImage: "url('https://images.pexels.com/photos/338504/pexels-photo-338504.jpeg?auto=compress&cs=tinysrgb&w=1260&h=750&dpr=1')",
           backgroundSize: 'cover',
           backgroundPosition: 'center',
         }}
@@ -79,10 +79,10 @@ const ContactSection = () => {
           <div className="text-center mb-8">
             <div className="flex items-center justify-center gap-4">
             <div className="h-px w-80 bg-red-600"></div>
-              <h2 className="text-4xl font-bold text-blue-600">Brenxx Auto</h2>
+              <h2 className="text-4xl font-bold text-blue-600" style={{ fontFamily: 'Courier, monospace' }}>German Point</h2>
               <div className="h-px w-80 bg-red-600"></div>
             </div>
-            <p className="text-white mt-2">Your trusted vehicle service partner</p>
+            <p className="text-white mt-2">Authentic German cuisine foods since 1999</p>
           </div>
 
           <div className="flex flex-col lg:flex-row gap-8">
@@ -92,19 +92,20 @@ const ContactSection = () => {
                 <h3 className="text-xl font-bold mb-4 text-blue-600">Contact Information</h3>
                 <div className="space-y-4">
                   <p>
-                    <span className="font-medium">Phone:</span> +254 799 686363
+                    <span className="font-medium">Phone:</span> 0798 363 800
                   </p>
                   <p>
-                    <span className="font-medium">Email:</span> brenxxautogarage@gmail.com
+                    <span className="font-medium">Email:</span> info@germanpoint.com
                   </p>
                   <div className="flex items-start">
                     <FaMapMarkerAlt className="mt-1 mr-2 text-red-400" />
                     <div>
                       <p className="font-medium">Location:</p>
-                      <p>Garden Estate, Limasi Villas</p>
-                      <p>Castle Gardens, Nairobi</p>
+                      <p>Rosslyn Riviera Mall,</p>
+                      <p>Limuru Road
+                      Nairobi, Kenya</p>
                       <a
-                        href="https://maps.app.goo.gl/C2Nck5qf7G3N3dAE7"
+                        href="https://maps.app.goo.gl/PEWYT72CroAx68Ft5"
                         target="_blank"
                         rel="noopener noreferrer"
                         className="text-blue-400 hover:underline inline-block mt-2"
@@ -118,7 +119,7 @@ const ContactSection = () => {
                 {/* Google Map */}
                 <div className="mt-6 rounded-lg overflow-hidden h-48">
                   <iframe
-                    src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d3988.9023723913806!2d36.85803936820727!3d-1.2277353960212578!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x182f1713d27fd3c9%3A0x6f7b49f497186e3f!2sBrenxx%20Auto!5e0!3m2!1sen!2ske!4v1743074969462!5m2!1sen!2ske"
+                    src="https://www.google.com/maps/embed?pb=!1m14!1m8!1m3!1d15955.67976678517!2d36.799329!3d-1.215903!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x182f3d5edfa7d25b%3A0x1ac8bb30a1bd6d00!2sGerman%20Point!5e0!3m2!1sen!2ske!4v1745058762510!5m2!1sen!2ske"
                     width="100%"
                     height="100%"
                     style={{ border: 0 }}
@@ -149,7 +150,7 @@ const ContactSection = () => {
                     <FaHome className="mr-2" /> Home
                   </Link>
                   <Link to="/services" className="flex items-center text-gray-300 hover:text-white transition">
-                    <FaTools className="mr-2" /> Services
+                    <FaTools className="mr-2" /> Our Menu
                   </Link>
                   <Link to="/gallery" className="flex items-center text-gray-300 hover:text-white transition">
                     <FaImages className="mr-2" /> Gallery
@@ -164,7 +165,7 @@ const ContactSection = () => {
                     <FaEnvelope className="mr-2" /> Contact
                   </Link>
                   <Link to="/book-appointment" className="flex items-center text-gray-300 hover:text-white transition col-span-2">
-                    <FaCalendarAlt className="mr-2" /> Book Now
+                    <FaCalendarAlt className="mr-2" /> Order Now
                   </Link>
                 </div>
 
@@ -172,13 +173,13 @@ const ContactSection = () => {
                 <div className="mt-8">
                   <h4 className="text-lg font-semibold mb-3 text-blue-400">Follow Us</h4>
                   <div className="flex space-x-10">
-                    <a href="https://www.facebook.com/share/1A4HdDfqRn/" target="_blank" rel="noopener noreferrer" className="text-blue-400 hover:text-blue-300">
+                    <a href="https://www.facebook.com/people/German-Point/100054201383454/" target="_blank" rel="noopener noreferrer" className="text-blue-400 hover:text-blue-300">
                       <FaFacebook size={20} />
                     </a>
-                    <a href="https://www.instagram.com/brenxx_autogarage" target="_blank" rel="noopener noreferrer" className="text-pink-400 hover:text-pink-300">
+                    <a href="https://www.instagram.com/germanpoint_/" target="_blank" rel="noopener noreferrer" className="text-pink-400 hover:text-pink-300">
                       <FaInstagram size={20} />
                     </a>
-                    <a href="https://www.tiktok.com/@brenxxauto" target="_blank" rel="noopener noreferrer" className="text-purple-400 hover:text-purple-300">
+                    <a href="https://www.tiktok.com/@germanpoint_?is_from_webapp=1&sender_device=pc" target="_blank" rel="noopener noreferrer" className="text-purple-400 hover:text-purple-300">
                       <FaTiktok size={20} />
                     </a>
                   </div>
@@ -186,7 +187,7 @@ const ContactSection = () => {
                   {/* WhatsApp Button */}
                   <div className="mt-8">
                     <a
-                      href="https://wa.me/254799686363"
+                      href="https://wa.me/254798363800"
                       target="_blank"
                       rel="noopener noreferrer"
                       className="flex items-center justify-center bg-green-500 hover:bg-green-600 text-white font-bold py-2 px-4 rounded-lg shadow-md transition"
@@ -201,7 +202,7 @@ const ContactSection = () => {
 
           {/* Copyright */}
           <div className="mt-10 text-center text-blue-100 text-xl">
-            <p>© {new Date().getFullYear()} Brenxx Auto Services. All rights reserved.</p>
+            <p>© {new Date().getFullYear()} German Point. All rights reserved.</p>
             <p className="mt-1">Map data ©2025 | Terms</p>
           </div>
         </div>

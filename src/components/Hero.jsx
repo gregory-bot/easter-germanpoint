@@ -56,7 +56,7 @@ function Hero() {
         {/* Static Text */}
         <div className="text-center mb-12">
           <p
-            className="text-2xl md:text-7xl font-semibold"
+            className="text-4xl md:text-7xl font-semibold"
             style={{ fontFamily: "Courier, monospace" }}
           >
             Welcome to German Point
@@ -69,7 +69,7 @@ function Hero() {
         </div>
 
         {/* CTA */}
-        <div className="absolute bottom-12 flex justify-center w-full z-20">
+        <div className="absolute bottom-14 flex justify-center w-full z-20">
           <button
             onClick={scrollToServices}
             className="bg-red-600 text-xl text-white px-6 py-3 rounded-full hover:bg-blue-700 transition duration-300"

@@ -5,7 +5,7 @@ const GalleryPreview = () => {
   const previewImages = [
     {
       id: 1,
-      url: 'https://i.postimg.cc/bwkYCyLm/hjh.jpg',
+      url: 'https://i.postimg.cc/Zqn94Nsw/about1.jpg',
       alt: 'our services'
     }
   ];
@@ -16,13 +16,13 @@ const GalleryPreview = () => {
         <div className="text-center mb-12">
           {/* Added logo image above the heading */}
           <img 
-            src="https://i.postimg.cc/gJCNMjt8/brenxlogo.jpg" 
-            alt="BRENXX-AUTO logo" 
-            className="h-8 w-auto mx-auto mb-4"
+            src="https://i.postimg.cc/HxfZNvVV/logo-2.jpg" 
+            alt="German Point logo" 
+            className="h-10 w-auto mx-auto mb-4"
           />
           <h2 className="text-4xl font-bold text-black mb-4">Gallery</h2>
           <p className="text-lg text-gray-600 max-w-2xl mx-auto">
-            Take a look at our work and satisfied customers
+          Explore our culinary creations and happy dining moments.
           </p>
         </div>
 

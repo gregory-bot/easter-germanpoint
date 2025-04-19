@@ -17,16 +17,25 @@ import {
 import { useCart } from '../context/CartContext';
 
 const services = [
-  { id: 1, name: 'Car Repair & Service' },
-  { id: 2, name: 'Mechanical & Electrical Repairs' },
-  { id: 3, name: 'Paint & Body Work' },
-  { id: 4, name: 'Vehicle Diagnostics' },
-  { id: 5, name: 'Accident Repairs' },
-  { id: 6, name: 'Maintenance Services' },
-  { id: 7, name: 'Tire Services' },
-  { id: 8, name: 'Vehicle Detailing' },
-  { id: 9, name: 'Brake & Suspension Services' },
-  { id: 10, name: 'Battery Check & Replacement' },
+  { id: 1, name: "German Specialties" },
+  { id: 2, name: "Breakfast" },
+  { id: 3, name: "Soups" },
+  { id: 4, name: "Light Meals & Snacks" },
+  { id: 5, name: "Chicken Dishes" },
+  { id: 6, name: "Fish Dishes" },
+  { id: 7, name: "Salads" },
+  { id: 8, name: "Lamb & Pork" },
+  { id: 9, name: "Vegetarian Dishes" },
+  { id: 10, name: "Cocktails & Beverages" },
+  { id: 11, name: "Indian Wraps" },
+  { id: 12, name: "BBQ" },
+  { id: 13, name: "Mutton Dishes" },
+  { id: 14, name: "Rice/Pilau/Biryani" },
+  { id: 15, name: "Naans" },
+  { id: 16, name: "Vegetarian & Non-Vegetarian Dishes" },
+  { id: 17, name: "Beef & Pork" },
+  { id: 18, name: "Seafood, Chow Mein & Pasta" },
+  { id: 19, name: "Offers" },
 ];
 
 function Navbar() {
@@ -89,11 +98,12 @@ function Navbar() {
           <div className="flex items-center">
             <img
               src="https://i.postimg.cc/HxfZNvVV/logo-2.jpg"
-              alt="brenxx-auto-services"
-              className="h-14 w-20 mr-2"
+              alt="Germanpoint Logo"
+              onClick={() => handleNavigation('/')}
+              className="h-12 w-auto mr-2"
             />
             <Link to="/" className="text-3xl">
-              <span className="text-red-600 font-bold" style={{ fontFamily: 'Courier, monospace' }}>German Point</span>
+              <span className="text-red-600 font-bold tracking-wide" style={{ fontFamily: 'Courier, monospace' }}>German Point</span>
             </Link>
           </div>
 
