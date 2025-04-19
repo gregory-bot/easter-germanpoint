@@ -4,39 +4,40 @@ const CartContext = createContext();
 
 export function CartProvider({ children }) {
   const [cartItems, setCartItems] = useState(() => {
-    // Clear the cart from localStorage on initial load
-    localStorage.removeItem('cart');
-    return [];
+    // Load the cart from localStorage on initial load
+    const savedCart = localStorage.getItem('cart');
+    return savedCart ? JSON.parse(savedCart) : [];
   });
 
   useEffect(() => {
+    // Save the cart to localStorage whenever it changes
     localStorage.setItem('cart', JSON.stringify(cartItems));
   }, [cartItems]);
 
   const addToCart = (item) => {
     setCartItems((prevItems) => {
-      const existingItem = prevItems.find(
-        (i) =>
-          i.id === item.id &&
-          i.serviceType === item.serviceType &&
-          i.vehicleType === item.vehicleType
-      );
+      const existingItem = prevItems.find((i) => i.id === item.id);
       if (existingItem) {
-        return prevItems; // If the item already exists, don't add it again
+        // If the item already exists, increase its quantity
+        return prevItems.map((i) =>
+          i.id === item.id ? { ...i, quantity: i.quantity + 1 } : i
+        );
       }
-      return [...prevItems, item]; // Add the new item to the cart
+      // Add the new item to the cart with a quantity of 1
+      return [...prevItems, { ...item, quantity: 1 }];
     });
   };
 
-  const removeFromCart = (itemId, serviceType, vehicleType) => {
+  const removeFromCart = (itemId) => {
     setCartItems((prevItems) =>
-      prevItems.filter(
-        (item) =>
-          !(
-            item.id === itemId &&
-            item.serviceType === serviceType &&
-            item.vehicleType === vehicleType
-          )
+      prevItems.filter((item) => item.id !== itemId)
+    );
+  };
+
+  const updateItemQuantity = (itemId, quantity) => {
+    setCartItems((prevItems) =>
+      prevItems.map((item) =>
+        item.id === itemId ? { ...item, quantity } : item
       )
     );
   };
@@ -51,8 +52,10 @@ export function CartProvider({ children }) {
         cartItems,
         addToCart,
         removeFromCart,
+        updateItemQuantity,
         clearCart,
-        totalItems: cartItems.length,
+        totalItems: cartItems.reduce((total, item) => total + item.quantity, 0), // Total quantity of items
+        totalPrice: cartItems.reduce((total, item) => total + item.price * item.quantity, 0), // Total price of items
       }}
     >
       {children}

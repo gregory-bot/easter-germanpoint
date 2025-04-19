@@ -1,5 +1,6 @@
 import { useEffect, useState } from 'react';
 import { useParams, useNavigate } from 'react-router-dom';
+import { useCart } from '../context/CartContext'; 
 const germanSpecialties = [
     {
       id: 'gs1',
@@ -935,74 +936,70 @@ const breakfast = [
           },
         ];
 
-function ServiceDetails() {
-  const { id } = useParams();
-  const navigate = useNavigate(); // Initialize navigate
-
-  // Function to get the service items based on the service ID
-  const getServiceItems = (serviceId) => {
-    switch (serviceId) {
-      case '1': return germanSpecialties;
-      case '2': return breakfast ;
-      case '3': return soups;
-      case '4': return lightMealsAndSnacks;
-      case '5': return chicken;
-      case '6': return fish;
-      case '7': return salads;
-      case '8': return lambAndPork;
-      case '9': return vegetarianDishes;
-      case '10': return cocktails;
-      case '11': return indianWraps;
-      case '12': return bbq;
-      case '13': return muttonDishes;
-      case '14': return ricePilauBiryani;
-      case '15': return naans;
-      case '16': return vegetarianAndNonVegetarianDishes;
-      case '17': return beefAndPork;
-      case '18': return seafoodChowMeinAndPasta;   
-      default: return [];
-    }
-  };
-
-  const serviceItems = getServiceItems(id);
-
-  const handleBookService = (serviceId) => {
-    navigate(`/book-appointment?service=${serviceId}`); 
-    window.scrollTo({ top: 0, behavior: 'smooth' });
-  };
-
-  return (
-    <div className="min-h-screen bg-gray-50 pt-20 pb-10">
-      <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-        <h1 className="text-4xl mb-8">Available Services</h1>
-        <div className="grid grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-4">
-          {serviceItems.map((item) => (
-            <div key={item.id} className="bg-white rounded-lg shadow-lg overflow-hidden max-w-xs">
-              <div className="relative overflow-hidden" style={{ paddingBottom: '56.25%' }}>
-                <img
-                  src={item.image}
-                  alt={item.title}
-                  className="absolute top-0 left-0 w-full h-full object-contain transform transition-transform duration-500 hover:scale-110"
-                />
-              </div>
-              <div className="p-3">
-                <h3 className="text-lg font-semibold mb-1">{item.title}</h3>
-                <p className="text-gray-600 text-sm mb-3">{item.description}</p>
-                <div className="flex justify-end">
-                  <button
-                    onClick={() => handleBookService(item.id)} // Pass the service ID
-                    className="bg-red-500 hover:bg-green-600 text-white px-3 py-1 rounded text-sm transition-colors duration-300"
-                  >
-                    Book Service
-                  </button>
+        function ServiceDetails() {
+          const { id } = useParams();
+          const { addToCart } = useCart(); // Access the addToCart function from the context
+        
+          // Function to get the service items based on the service ID
+          const getServiceItems = (serviceId) => {
+            switch (serviceId) {
+              case '1': return germanSpecialties;
+              case '2': return breakfast;
+              case '3': return soups;
+              case '4': return lightMealsAndSnacks;
+              case '5': return chicken;
+              case '6': return fish;
+              case '7': return salads;
+              case '8': return lambAndPork;
+              case '9': return vegetarianDishes;
+              case '10': return cocktails;
+              case '11': return indianWraps;
+              case '12': return bbq;
+              case '13': return muttonDishes;
+              case '14': return ricePilauBiryani;
+              case '15': return naans;
+              case '16': return vegetarianAndNonVegetarianDishes;
+              case '17': return beefAndPork;
+              case '18': return seafoodChowMeinAndPasta;
+              default: return [];
+            }
+          };
+        
+          const serviceItems = getServiceItems(id);
+        
+          return (
+            <div className="min-h-screen bg-gray-50 pt-20 pb-10">
+              <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+                <h1 className="text-4xl mb-8">Available Items</h1>
+                <div className="grid grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-4">
+                  {serviceItems.map((item) => (
+                    <div key={item.id} className="bg-white rounded-lg shadow-lg overflow-hidden max-w-xs">
+                      <div className="relative overflow-hidden" style={{ paddingBottom: '56.25%' }}>
+                        <img
+                          src={item.image}
+                          alt={item.title}
+                          className="absolute top-0 left-0 w-full h-full object-contain transform transition-transform duration-500 hover:scale-110"
+                        />
+                      </div>
+                      <div className="p-3">
+                        <h3 className="text-lg font-semibold mb-1">{item.title}</h3>
+                        <p className="text-gray-600 text-sm mb-3">{item.description}</p>
+                        <p className="text-gray-800 font-bold mb-3">Price: Ksh {item.price}</p>
+                        <div className="flex justify-end">
+                          <button
+                            onClick={() => addToCart(item)} // Use the addToCart function
+                            className="bg-red-500 hover:bg-green-600 text-white px-3 py-1 rounded text-sm transition-colors duration-300"
+                          >
+                            Add to Cart
+                          </button>
+                        </div>
+                      </div>
+                    </div>
+                  ))}
                 </div>
               </div>
             </div>
-          ))}
-        </div>
-      </div>
-    </div>
-  );
-}
-
-export default ServiceDetails;
+          );
+        }
+        
+        export default ServiceDetails;
