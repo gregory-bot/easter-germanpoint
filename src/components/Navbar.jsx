@@ -35,7 +35,6 @@ const services = [
   { id: 16, name: "Vegetarian & Non-Vegetarian Dishes" },
   { id: 17, name: "Beef & Pork" },
   { id: 18, name: "Seafood, Chow Mein & Pasta" },
-  { id: 19, name: "Offers" },
 ];
 
 function Navbar() {
