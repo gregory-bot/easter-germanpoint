@@ -183,21 +183,12 @@ export default function ChatWidget() {
 
       {/* Phone Call FAB */}
       <a
-        href="tel:+254798363800" // Replace with your phone number
-        className="fixed bottom-20 left-6 bg-green-500 text-white p-4 rounded-full shadow-lg hover:bg-green-600 transition duration-300 z-50"
+        href="tel:+254798363800"
+        className="fixed bottom-6 left-6 bg-green-500 text-white p-4 rounded-full shadow-lg hover:bg-green-600 transition duration-300 z-50"
         aria-label="Call Us"
       >
         <FaPhoneAlt size={20} />
       </a>
-
-      {/* Back to Top Button */}
-      <button
-        onClick={() => window.scrollTo({ top: 0, behavior: "smooth" })}
-        className="fixed bottom-6 left-6 bg-blue-600 hover:bg-blue-700 text-white p-3 rounded-full shadow-lg transition-all duration-300 z-50"
-        aria-label="Scroll to top"
-      >
-        <FaArrowUp size={15} />
-      </button>
 
       {/* Chat Widget */}
       <div

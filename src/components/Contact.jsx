@@ -1,5 +1,5 @@
 import React, { useState, useEffect } from 'react';
-import { FaMapMarkerAlt, FaArrowUp, FaCheck, FaTimes } from 'react-icons/fa';
+import { FaMapMarkerAlt, FaArrowUp, FaPhoneAlt } from 'react-icons/fa';
 import {
   FaFacebook,
   FaInstagram,
@@ -20,7 +20,8 @@ const ContactSection = () => {
 
   useEffect(() => {
     const handleScroll = () => {
-      if (window.scrollY > 6000) {
+      // Show the button if the user scrolls past 600px, hide otherwise
+      if (window.scrollY > 5000) {
         setShowScrollButton(true);
       } else {
         setShowScrollButton(false);
@@ -32,24 +33,25 @@ const ContactSection = () => {
   }, []);
 
   const scrollToTop = () => {
-    const duration = 3000;
-    const start = window.pageYOffset;
-    const startTime = performance.now();
+    const duration = 3000; // Duration for smooth scrolling
+    const start = window.pageYOffset; // Current scroll position
+    const startTime = performance.now(); // Start time of the animation
 
     const animateScroll = (currentTime) => {
-      const elapsedTime = currentTime - startTime;
-      const progress = Math.min(elapsedTime / duration, 1);
-      window.scrollTo(0, start * (1 - easeInOutQuad(progress)));
+      const elapsedTime = currentTime - startTime; // Time elapsed since the animation started
+      const progress = Math.min(elapsedTime / duration, 1); // Progress (0 to 1)
+      window.scrollTo(0, start * (1 - easeInOutQuad(progress))); // Scroll position based on easing
       if (progress < 1) {
-        requestAnimationFrame(animateScroll);
+        requestAnimationFrame(animateScroll); // Continue animation if not complete
       }
     };
 
+    // Easing function for smooth scrolling
     const easeInOutQuad = (t) => {
       return t < 0.5 ? 2 * t * t : -1 + (4 - 2 * t) * t;
     };
 
-    requestAnimationFrame(animateScroll);
+    requestAnimationFrame(animateScroll); // Start the animation
   };
 
   return (
@@ -64,22 +66,27 @@ const ContactSection = () => {
           backgroundPosition: 'center',
         }}
       >
+        {/* Back to Top Button */}
         {showScrollButton && (
-          <button
-            onClick={scrollToTop}
-            className="fixed bottom-6 left-6 bg-blue-600 hover:bg-blue-700 text-white p-3 rounded-full shadow-lg transition-all duration-300 z-50"
-            aria-label="Scroll to top"
-          >
-            <FaArrowUp size={15} />
-          </button>
+          <>
+            <button
+              onClick={scrollToTop}
+              className="fixed bottom-20 left-6 bg-blue-600 hover:bg-blue-700 text-white p-3 rounded-full shadow-lg transition-all duration-300 z-50"
+              aria-label="Scroll to top"
+            >
+              <FaArrowUp size={15} />
+            </button>
+          </>
         )}
 
         <div className="container mx-auto px-4">
           {/* Brand Header */}
           <div className="text-center mb-8">
             <div className="flex items-center justify-center gap-4">
-            <div className="h-px w-80 bg-red-600"></div>
-              <h2 className="text-4xl font-bold text-red-600" style={{ fontFamily: 'Courier, monospace' }}>German Point</h2>
+              <div className="h-px w-80 bg-red-600"></div>
+              <h2 className="text-4xl font-bold text-black" style={{ fontFamily: 'Courier, monospace' }}>
+                German Point
+              </h2>
               <div className="h-px w-80 bg-red-600"></div>
             </div>
             <p className="text-white mt-2">Authentic German cuisine foods since 1999</p>
@@ -102,8 +109,7 @@ const ContactSection = () => {
                     <div>
                       <p className="font-medium">Location:</p>
                       <p>Rosslyn Riviera Mall,</p>
-                      <p>Limuru Road
-                      Nairobi, Kenya</p>
+                      <p>Limuru Road Nairobi, Kenya</p>
                       <a
                         href="https://maps.app.goo.gl/PEWYT72CroAx68Ft5"
                         target="_blank"
@@ -126,7 +132,7 @@ const ContactSection = () => {
                     allowFullScreen=""
                     loading="lazy"
                     referrerPolicy="no-referrer-when-downgrade"
-                    title="Brenxx Auto Location"
+                    title="German Point Location"
                   ></iframe>
                 </div>
 
@@ -173,13 +179,28 @@ const ContactSection = () => {
                 <div className="mt-8">
                   <h4 className="text-lg font-semibold mb-3 text-blue-400">Follow Us</h4>
                   <div className="flex space-x-10">
-                    <a href="https://www.facebook.com/people/German-Point/100054201383454/" target="_blank" rel="noopener noreferrer" className="text-blue-400 hover:text-blue-300">
+                    <a
+                      href="https://www.facebook.com/people/German-Point/100054201383454/"
+                      target="_blank"
+                      rel="noopener noreferrer"
+                      className="text-blue-400 hover:text-blue-300"
+                    >
                       <FaFacebook size={20} />
                     </a>
-                    <a href="https://www.instagram.com/germanpoint_/" target="_blank" rel="noopener noreferrer" className="text-pink-400 hover:text-pink-300">
+                    <a
+                      href="https://www.instagram.com/germanpoint_/"
+                      target="_blank"
+                      rel="noopener noreferrer"
+                      className="text-pink-400 hover:text-pink-300"
+                    >
                       <FaInstagram size={20} />
                     </a>
-                    <a href="https://www.tiktok.com/@germanpoint_?is_from_webapp=1&sender_device=pc" target="_blank" rel="noopener noreferrer" className="text-purple-400 hover:text-purple-300">
+                    <a
+                      href="https://www.tiktok.com/@germanpoint_?is_from_webapp=1&sender_device=pc"
+                      target="_blank"
+                      rel="noopener noreferrer"
+                      className="text-purple-400 hover:text-purple-300"
+                    >
                       <FaTiktok size={20} />
                     </a>
                   </div>

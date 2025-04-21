@@ -44,7 +44,7 @@ Contact Number: ${orderData.phoneNumber}`;
     const whatsappNumber = '+254748163492';
 
     // Open WhatsApp with the pre-filled message
-    window.open(`https://wa.me/254748163492?text=${encodedMessage}`, '_blank');
+    window.open(`https://wa.me/254748163492 ?text=${encodedMessage}`, '_blank');
 
     // Optional: call the onSubmit prop if needed
     if (onSubmit) {
