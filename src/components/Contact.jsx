@@ -71,7 +71,7 @@ const ContactSection = () => {
           <>
             <button
               onClick={scrollToTop}
-              className="fixed bottom-20 left-6 bg-blue-600 hover:bg-blue-700 text-white p-3 rounded-full shadow-lg transition-all duration-300 z-50"
+              className="fixed bottom-20 left-4 bg-blue-600 hover:bg-blue-700 text-white p-3 rounded-full shadow-lg transition-all duration-300 z-50"
               aria-label="Scroll to top"
             >
               <FaArrowUp size={15} />
@@ -102,7 +102,7 @@ const ContactSection = () => {
                     <span className="font-medium">Phone:</span> 0798 363 800
                   </p>
                   <p>
-                    <span className="font-medium">Email:</span> info@germanpoint.com
+                    <span className="font-medium">Email:</span>  germanpoint28@gmail.com
                   </p>
                   <div className="flex items-start">
                     <FaMapMarkerAlt className="mt-1 mr-2 text-red-400" />

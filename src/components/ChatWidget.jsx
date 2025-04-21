@@ -184,7 +184,7 @@ export default function ChatWidget() {
       {/* Phone Call FAB */}
       <a
         href="tel:+254798363800"
-        className="fixed bottom-6 left-6 bg-green-500 text-white p-4 rounded-full shadow-lg hover:bg-green-600 transition duration-300 z-50"
+        className="fixed bottom-6 left-2 bg-green-500 text-white p-4 rounded-full shadow-lg hover:bg-green-600 transition duration-300 z-50"
         aria-label="Call Us"
       >
         <FaPhoneAlt size={20} />
@@ -192,7 +192,7 @@ export default function ChatWidget() {
 
       {/* Chat Widget */}
       <div
-        className={`fixed bottom-24 right-6 w-72 sm:w-80 bg-white rounded-lg shadow-xl z-40 transition-all duration-500 ${
+        className={`fixed bottom-24 right-2 w-72 sm:w-80 bg-white rounded-lg shadow-xl z-40 transition-all duration-500 ${
           isOpen ? 'opacity-100 translate-y-0' : 'opacity-0 translate-y-10 pointer-events-none'
         }`}
       >

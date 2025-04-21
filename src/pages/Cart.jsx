@@ -30,7 +30,7 @@ function Cart() {
       0
     )}`;
 
-    window.location.href = `mailto:info@germanpoint.com?subject=${encodeURIComponent(
+    window.location.href = `mailto:germanpoint28@gmail.com?subject=${encodeURIComponent(
       subject
     )}&body=${encodeURIComponent(body)}`;
   };
